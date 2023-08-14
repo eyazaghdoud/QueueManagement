@@ -3,18 +3,20 @@ package entities;
 import java.util.AbstractQueue;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class VirtualQueue extends AbstractQueue<VirtualTicket>{
 
-	 private LinkedList<VirtualTicket> elements;
+	 private List<VirtualTicket> elements;
 	 /*
 	 private Date date; 
 	 private int totalTickets;
 	 private int totalTreatedTickets;
 	 private int totalAbandonedTickets;
-	 private int averageWaitingTime;
+	 
 	 private Service mostRequestedService;
 	  */
+	 public final int averageWaitingTime = 15;
 
 	    public VirtualQueue() {
 	      this.elements = new LinkedList<VirtualTicket>();
@@ -40,7 +42,7 @@ public class VirtualQueue extends AbstractQueue<VirtualTicket>{
 
 	public VirtualTicket peek() {
 		// TODO Auto-generated method stub
-		 return elements.getFirst();
+		 return elements.get(0);
 	}
 
 	@Override
@@ -53,6 +55,26 @@ public class VirtualQueue extends AbstractQueue<VirtualTicket>{
 	public int size() {
 		// TODO Auto-generated method stub
 		 return elements.size();
+	}
+
+	public List<VirtualTicket> getElements() {
+		return elements;
+	}
+
+	public void setElements(List<VirtualTicket> elements) {
+		this.elements = elements;
+	}
+	
+	public int elementsBefore(VirtualTicket ticket) {
+		int index=0;
+		for (VirtualTicket element : elements) {
+            if (element.getNumber()==ticket.getNumber()) {
+                break;
+            } else {
+            	 index++;
+            }
+        }
+        return index;
 	}
 
 }

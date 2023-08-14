@@ -2,6 +2,8 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +27,9 @@ public class VirtualTicket {
 	            foreignKey = @ForeignKey(name = "FK_ticket_service")
 	            )
 	private Service service;
-	@Column(nullable = false)
-	private StatusType status;
+	@Column(columnDefinition = "ENUM('WAITING','TREATING','TREATED','ABANDONED')")
+    @Enumerated(EnumType.STRING)
+	private StatusType status= StatusType.WAITING;
 	@ManyToOne
 	@JoinColumn(name = "id_client",
 	            nullable = false,
