@@ -1,5 +1,7 @@
 package entities;
 
+import java.sql.Time;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +38,16 @@ public class VirtualTicket {
 	            foreignKey = @ForeignKey(name = "FK_ticket_client")
 	            )
 	private User client;
+	private Time startTime;
 	
+	public Time getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Time startTime) {
+		this.startTime = startTime;
+	}
+
 	public VirtualTicket() {
 		// TODO Auto-generated constructor stub
 	}

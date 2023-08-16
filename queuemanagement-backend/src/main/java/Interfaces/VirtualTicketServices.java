@@ -13,5 +13,6 @@ public interface VirtualTicketServices {
 	public List<VirtualTicket> getAllBookedTickets();
 	public TicketInfoResponse getTicketInfo(int ticketNumber);
 	public VirtualTicket getCurrentTicket();
+	public int countWaitingTime(VirtualTicket ticket);
 
 }
