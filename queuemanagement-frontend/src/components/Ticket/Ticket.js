@@ -4,7 +4,9 @@ import '../../index.css';
 
 import { FaReact } from "react-icons/fa";
 import {FaUserAlt } from "react-icons/fa";
+import {FaRegTimesCircle} from "react-icons/fa";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import {AiFillCalendar} from "react-icons/ai";
 import { VscChecklist } from "react-icons/vsc";
 import { FaPlay } from "react-icons/fa";
 import { MoonIcon } from "@heroicons/react/solid";
@@ -12,52 +14,66 @@ import { SunIcon } from "@heroicons/react/solid";
 import Nav from '../Nav/Navbar';
 
 
-export default function Ticket({ toggle, settoggle }) {
+export default function Ticket() {
   return (
     <div>
    <Nav/>
 
-    <div style={{margin:'10% auto'}} className="md:w-[50rem] md:h-[20.5rem] w-[20.5rem] h-[40rem] p-4 rounded-2xl bg-gray dark:bg-slate-800 shadow-lg dark:shadow-slate-700 flex flex-col ease-linear duration-300 md:flex-row-reverse">
+    <div style={{margin:'10% auto'}} className="md:w-[50rem] blue-950 md:h-[20.5rem] w-[20.5rem] h-[40rem] p-4 rounded-2xl bg-gray dark:bg-slate-800 shadow-lg dark:shadow-slate-700 flex flex-col ease-linear duration-300 md:flex-row-reverse">
       <div className=" h-full w-full  shadow-md rounded-2xl basis-2/3 relative" >
-        <div className=" text-white z-10 bg-[black] absolute pl-8 pr-8 pb-2 pt-2  rounded-tl-2xl rounded-br-2xl font-semibold">
+        <div className=" text-white z-10 bg-blue-950 absolute pl-8 pr-8 pb-2 pt-2  rounded-tl-2xl rounded-br-2xl font-semibold">
           <h1>Numéro de ticket</h1>
         </div>
-        <div className="text-black h-full w-full relative border-2 border-white rounded-2xl p-10">
-             <h1 style={{ fontSize:'100px'}}>23</h1>
-        </div>
-      </div>
-
-      <div className=" h-full w-full mr-2 rounded-2xl ">
-        <p className="m-2 font-bold pl-1 text-lg text-[yellow]">Bienvenue</p>
-        <h1 className="m-2 text-4xl font-bold dark:text-white">
-         Nom prénom
-        </h1>
-        <p className="m-2 font-bold pl-1 text-lg text-[yellow]">date: </p>
-        <div className=" pt-16 pr-2 pl-2 flex flex-row justify-around flex-wrap">
-       
-          <div className="flex flex-row items-center m-2">
-            <FaUserAlt size={20} color="#007acc" />
-            
-            <h1 className="pl-1 dark:text-white">Clients avant: 1</h1>
-          </div>
-          <div className="flex flex-row items-center m-2">
-            <AiOutlineClockCircle size={20} className="dark:text-white" />
-            <h1 className="pl-1 dark:text-white">Temps d'attente: 15 minutes</h1>
-          </div>
-          
-        </div>
-
-        <div className="flex flex-row">
-          <button className="md:m-2 m-auto mt-8 bg-[red] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#424bb6] ease-linear duration-300">
-           {/*<FaPlay className="animate-ping" size={10} color="#fff" /> */}
+        <div className="text-black h-full w-full relative border-2 border-white rounded-2xl p-10" style={{marginLeft:'50px', marginTop:'30px'}}>
+             <h1 style={{ fontSize:'90px'}}>23</h1>
+             <button style={{marginLeft:'-10px'}}
+             className="md:m-2 m-auto mt-8 bg-[grey] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#424bb6] ease-linear duration-300">
+           <FaRegTimesCircle  size={20} color="#fff" /> 
             <h1 className="text-white text-md font-semibold pl-2">
               Annuler
             </h1>
           </button>
-         
-           
-         
         </div>
+      
+         
+         
+      </div>
+
+      <div className=" h-full w-full mr-2 rounded-2xl ">
+        <p className="m-2 font-bold pl-1 text-lg text-blue-950">Bienvenue</p>
+        <h1 className="m-2 text-4xl font-bold dark:text-white">
+         Nom prénom
+        </h1>
+       
+        <div className="flex flex-row items-center m-2">
+            <AiFillCalendar size={20} color="grey" style={{marginTop:'20px'}} />
+            
+            <h1 className="pl-1 dark:text-white">date</h1>
+          </div>
+          <div className="flex flex-row items-center m-2">
+          
+            <h1 className="pl-1 dark:text-white" style={{marginLeft:'20px', marginTop:'-20px'}}>21-08-2023</h1>
+          </div>
+          <div className="flex flex-row items-center m-2">
+            <FaUserAlt size={20} color="grey" style={{marginTop:'20px'}} />
+            
+            <h1 className="pl-1 dark:text-white">20</h1>
+          </div>
+          <div className="flex flex-row items-center m-2">
+          
+            <h1 className="pl-1 dark:text-white" style={{marginLeft:'20px', marginTop:'-20px'}}>Clients en attente</h1>
+          </div>
+          
+       
+        <div className="flex flex-row items-center m-2">
+            <AiOutlineClockCircle size={20} className="dark:text-white" style={{marginTop:'20px'}}/>
+            <h1 className="pl-1 dark:text-white">15 minutes</h1>
+          </div>
+          <div className="flex flex-row items-center m-2">
+          
+            <h1 className="pl-1 dark:text-white" style={{marginLeft:'20px', marginTop:'-20px'}}>Temps d'attente</h1>
+          </div>
+        
       </div>
     </div>
     </div>

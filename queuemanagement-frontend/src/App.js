@@ -13,7 +13,12 @@ import './App.css';
 import SignIn from './components/Login/SignIn';
 import SignUp from "./components/SingUp/SignUp";
 import ResetPassword from "./components/Password/ResetPassword";
-
+import ChangePassword from "./components/Password/ChangePassword";
+import Queue from "./components/Queue/Queue";
+import CurrentTicket from "./components/Queue/CurrentTicket";
+import Appointment from "./components/Appointment/Appointment";
+import Dashboard from "./components/Admin/DashboardHeader";
+import EmployeesList from "./components/Admin/EmployeesList";
 function App() {
   return (
     <Routes>
@@ -25,6 +30,13 @@ function App() {
     <Route path="/SignUp" element={<SignUp />} />
     {/*<Route path="/Login" element={<LoginForm />} />*/}
     <Route path="/Reset_password" element={<ResetPassword />} />
+    <Route path="/Change_password" element={<ChangePassword />} />
+    <Route path="/Queue" element={<Queue />} />
+    <Route path="/current" element={<CurrentTicket />} />
+    <Route path="/appointment" element={<Appointment />} />
+    <Route path="/employees" element={<EmployeesList />} />
+
+
 
 
   </Routes>

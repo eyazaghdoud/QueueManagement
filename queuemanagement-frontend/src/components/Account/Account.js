@@ -1,4 +1,5 @@
 import Nav from "../Nav/Navbar"
+import { Link } from "react-router-dom";
 
 export default function Account() {
     return (
@@ -30,7 +31,10 @@ export default function Account() {
                                 <div class="flex">
                                     <input disabled id="pwd" class="border-1  rounded-r px-4 py-2 w-full" type="password" value="**********" />
                                 </div>
-                                <a href="#" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Changer le mot de passe</a>
+                                
+                                    <Link to="/Change_password"
+                                    class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
+                                    Changer le mot de passe</Link>
 
                             </div>
                         </div>
@@ -54,7 +58,6 @@ export default function Account() {
                                     <label for="about" class="font-semibold text-gray-700 block pb-1">Numéro de téléphone</label>
                                     <input id="tel" class="border-1  rounded-r px-4 py-2 w-full" type="text" value="Numero" />
 
-                                    <span class="text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
                                 </div>
 
                             </div>
