@@ -1,36 +1,25 @@
 import { Button } from "@material-ui/core"
 import DashboardHeader from "./DashboardHeader"
-import { useNavigate } from "react-router-dom";
 
-export default function EmployeesList() {
+export default function ClientsList() {
 
-    let navigate = useNavigate();
-    const addEmployeeHandler = (event) => {
-        event.preventDefault();
-        navigate('/new_employee');
-       
-      };
     return (
         <>
         
          <DashboardHeader/>
          <div x-data="setup()" class="dark h-full" >
             <div class=" h-full ml-14 mt-20 mb-10 md:ml-64 dark">
-            <span class="px-2 py-1 ml-8 font-semibold leading-tight hover:bg-gray-500 text-gray-200 bg-gray-800 rounded-full "> 
-                <button onClick={addEmployeeHandler}
-                >
-                    Ajouter un employé 
-                </button>
-            </span>
+             
                 <div class="mt-4 mx-4">
                     <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
                             <table class="w-full">
                                 <thead>
                                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                        <th class="px-4 py-3">Employé</th>
-                                        <th class="px-4 py-3">Role</th>
-                                        <th class="px-4 py-3">Date de recrutement</th>
+                                        <th class="px-4 py-3">Client</th>
+                                        <th class="px-4 py-3">Téléphone</th>
+                                        <th class="px-4 py-3">Email</th>
+                                        <th class="px-4 py-3">Date d'enregistrement</th>
                                         <th class="px-4 py-3">Actions</th>
                                         
                                     </tr>
@@ -48,15 +37,14 @@ export default function EmployeesList() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">Opérateur web</td>
+                                        <td class="px-4 py-3 text-sm">55555555</td>
                                         
-                                        <td class="px-4 py-3 text-sm">15-01-2021</td>
+                                        <td class="px-4 py-3 text-sm" > email@email.com </td>
+                                        <td class="px-4 py-3 text-sm" >15-01-2021 </td>
                                         <td class="px-4 py-3 text-xs">
-                                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> 
-                                            <button>Rendre admin</button>
-                                            </span>
-                                            <span class="px-2 py-1 ml-8 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> 
-                                            <button>Supprimer </button>
+                                           
+                                            <span class="px-2 py-1  font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> 
+                                            <button>Désactiver le compte </button>
                                             </span>
 
                                         </td>
@@ -66,7 +54,7 @@ export default function EmployeesList() {
                             </table>
                         </div>
                         <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3"> Total des employés: 20 </span>
+                            <span class="flex items-center col-span-3"> Total des clients: 20 </span>
                             
                         </div>
                     </div>

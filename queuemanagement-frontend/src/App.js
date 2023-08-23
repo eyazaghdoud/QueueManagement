@@ -19,6 +19,10 @@ import CurrentTicket from "./components/Queue/CurrentTicket";
 import Appointment from "./components/Appointment/Appointment";
 import Dashboard from "./components/Admin/DashboardHeader";
 import EmployeesList from "./components/Admin/EmployeesList";
+import ClientsList from "./components/Admin/ClientsList";
+import NewEmployeeForm from "./components/Admin/NewEmployeeForm";
+import AdminAccount from "./components/Admin/AdminAccount";
+
 function App() {
   return (
     <Routes>
@@ -35,6 +39,10 @@ function App() {
     <Route path="/current" element={<CurrentTicket />} />
     <Route path="/appointment" element={<Appointment />} />
     <Route path="/employees" element={<EmployeesList />} />
+    <Route path="/clients" element={<ClientsList />} />
+    <Route path="/new_employee" element={<NewEmployeeForm />} />
+    <Route path="/admin_account" element={<AdminAccount/>} />
+
 
 
 

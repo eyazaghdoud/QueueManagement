@@ -1,4 +1,7 @@
 import './dashboard.css'
+import logo from '../../assets/agil.gif'
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function DashboardHeader() {
 
@@ -11,7 +14,7 @@ export default function DashboardHeader() {
                     {/* <-- ./Header -->*/}
                     <div class="fixed w-full flex items-center justify-between h-14 text-white z-10">
                         <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-                            <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+                            <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src={logo} />
                             <span class="hidden md:block">ADMIN</span>
                         </div>
                         <div class="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
@@ -63,7 +66,9 @@ export default function DashboardHeader() {
                                         <span class="inline-flex justify-center items-center ml-4">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                         </span>
-                                        <span class="ml-2 text-sm tracking-wide truncate">Employés</span>
+                                        <span class="ml-2 text-sm tracking-wide truncate">
+                                           <Link to='/employees'> Employés </Link>
+                                            </span>
                                     </a>
                                 </li>
                                 <li>
@@ -71,7 +76,9 @@ export default function DashboardHeader() {
                                         <span class="inline-flex justify-center items-center ml-4">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                         </span>
-                                        <span class="ml-2 text-sm tracking-wide truncate">Clients</span>
+                                        <span class="ml-2 text-sm tracking-wide truncate">
+                                        <Link to='/clients'>Clients</Link>
+                                        </span>
                                     </a>
                                 </li>
                                 
@@ -85,7 +92,9 @@ export default function DashboardHeader() {
                                         <span class="inline-flex justify-center items-center ml-4">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                         </span>
-                                        <span class="ml-2 text-sm tracking-wide truncate">Profile</span>
+                                        <span class="ml-2 text-sm tracking-wide truncate">
+                                        <Link to='/admin_account'>Compte</Link>
+                                        </span>
                                     </a>
                                 </li>
                                 <li>

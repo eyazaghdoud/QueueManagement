@@ -12,7 +12,9 @@ export default function Account() {
                         <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
                             <div class="flex justify-between">
                                 <span class="text-xl font-semibold block">Nom et prénom</span>
-                                <a href="#" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Edit</a>
+                                <button class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
+                                    Edit
+                                    </button>
                             </div>
 
                             <span class="text-gray-600">Informations de connexion</span>
