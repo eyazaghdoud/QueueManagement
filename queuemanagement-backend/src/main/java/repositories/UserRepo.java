@@ -13,13 +13,14 @@ import entities.User.RoleType;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer>{
 	
-	
-	
 	@Query("SELECT u FROM user u WHERE u.email = ?1")
-	Optional<User> findByEmail(String email);
+	Optional<User> selectByEmail(String email);
 	
 	@Query("SELECT u FROM user u WHERE u.role = ?1")
     List<User> findByRole(RoleType role);
+	
+	@Query("SELECT u FROM user u WHERE u.role <> 'CLIENT'")
+    List<User> findEmployees();
 	
 	@Query("SELECT u FROM user u WHERE u.phoneNumber = ?1")
     Optional<User> findByPhoneNumber(int number);

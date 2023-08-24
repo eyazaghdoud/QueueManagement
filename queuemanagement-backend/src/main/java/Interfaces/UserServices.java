@@ -19,6 +19,7 @@ public interface UserServices {
 	public String changeRole(UpdateRoleRequest updateRoleRequest);
 	public List<User> findAllUsers();
 	public List<User> findAllByRole(RoleType role);
+	public List<User> findAllEmployees();
     public Optional<User> selectByEmail(String email) ;
     public String changePassword(ChangePwdRequest request);
     public String resetPassword(ResetPwdRequest request);

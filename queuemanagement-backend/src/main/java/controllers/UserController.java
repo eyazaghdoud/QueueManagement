@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import entities.User.RoleType;
 
 @RestController
 @RequestMapping(path="/user")
+@CrossOrigin(origins= "*", allowedHeaders="*")
 public class UserController {
 	
 	@Autowired
@@ -51,13 +53,18 @@ public class UserController {
 		return userServices.findAllUsers();
 	}
 	
-	@GetMapping("/all_users_by_role")
+	@PostMapping("/all_users_by_role")
 	public List<User> getUsersByRole(@RequestBody RoleType role) {	
 		return userServices.findAllByRole(role);
 	}
 	
-	@GetMapping("/single_user")
-	public Optional<User> getFingleUser(@RequestBody String email) {	
+	@GetMapping("/all_employees")
+	public List<User> getEmployees() {	
+		return userServices.findAllEmployees();
+	}
+	
+	@PostMapping("/single_user")
+	public Optional<User> getSingleUser(@RequestBody String email) {	
 		return userServices.selectByEmail(email);
 	}
 
@@ -69,7 +76,7 @@ public class UserController {
 	}
 	
 	/* change password */
-	@PostMapping("/forgot_password")
+	@PostMapping("/change_password")
 	public String changePassword(@RequestBody ChangePwdRequest request) {	
 		return userServices.changePassword(request);
 	}

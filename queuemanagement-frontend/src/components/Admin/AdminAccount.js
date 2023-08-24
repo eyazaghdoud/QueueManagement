@@ -1,11 +1,28 @@
 import { Button } from "@material-ui/core"
 import DashboardHeader from "./DashboardHeader"
 import { useNavigate } from "react-router-dom";
-import './dashboard.css'
+import './dashboard.css';
+import { useState } from 'react'
+import { useEffect} from 'react'
+import UserServices from '../../API/UserServices'
 
 export default function AdminAccount() {
 
     let navigate = useNavigate();
+    const [user, setUser] = useState([])
+    
+
+    useEffect(() => {
+            UserServices.getSingleUser('flen@flen')
+            .then(response => {
+                setUser(response.data)
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }, [])
     const submitHandler = (event) => {
         event.preventDefault();
 
@@ -27,7 +44,7 @@ export default function AdminAccount() {
                             <div class=" md:w-2/5 p-4 sm:p-6 lg:p-8 dark shadow-md ">
                                 <div class="flex justify-between">
 
-                                    <span class="text-xl text-gray-300 font-semibold block">Nom et prénom</span>
+                                    <span class="text-xl text-gray-300 font-semibold block">{user.firstName} {user.lastName}</span>
                                     <button href="#" class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
                                         Edit</button>
                                 </div>
@@ -39,7 +56,9 @@ export default function AdminAccount() {
 
                                 <div class="mb-6">
                                     <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">E-mail</label>
-                                    <input type="email" name="email" id="email" placeholder="you@company.com" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                                    <input type="email" name="email" id="email" 
+                                    value={user.email}
+                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                 </div>
                                 <div >
                                     <div class="mb-6">
@@ -64,14 +83,14 @@ export default function AdminAccount() {
                                         <label for="lastname" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Nom</label>
                                         <input type="text"
                                             name="lastname"
-                                            id="lastname" placeholder="Nom"
+                                            id="lastname" value={user.lastName}
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-6">
                                         <label for="firstname" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Prénom</label>
                                         <input type="text"
                                             name="firstname"
-                                            id="firstname" placeholder="prenom"
+                                            id="firstname" value={user.firstName}
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
 
@@ -79,7 +98,7 @@ export default function AdminAccount() {
                                         <label for="tel"
                                             class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Numéro de téléphone</label>
                                         <input type="text"
-                                            name="tel" id="tel" placeholder="you@company.com" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                                            name="tel" id="tel" value={user.phoneNumber} class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
 
                                 </div>
@@ -90,7 +109,7 @@ export default function AdminAccount() {
 
                     </form>
                 </div>
-            </div>
+    </div>
 
 
 

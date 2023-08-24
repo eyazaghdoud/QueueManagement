@@ -1,7 +1,24 @@
 import { Button } from "@material-ui/core"
 import DashboardHeader from "./DashboardHeader"
+import { useState } from 'react'
+import { useEffect} from 'react'
+import UserServices from '../../API/UserServices'
 
 export default function ClientsList() {
+
+    const [userList, setUserList] = useState([])
+
+    useEffect(() => {
+            UserServices.getClients()
+            .then(response => {
+                setUserList(response.data)
+
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }, [])
 
     return (
         <>
@@ -25,7 +42,9 @@ export default function ClientsList() {
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                    <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                 
+                                  {userList.map(user => (
+                                    <tr key={user.id} class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                                         <td class="px-4 py-3">
                                             <div class="flex items-center text-sm">
                                                 <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -33,13 +52,13 @@ export default function ClientsList() {
                                                     <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                                 </div>
                                                 <div>
-                                                    <p class="font-semibold">Hans Burger</p>
+                                                    <p class="font-semibold">{user.firstName} {user.lastName}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">55555555</td>
+                                        <td class="px-4 py-3 text-sm">{user.phoneNumber}</td>
                                         
-                                        <td class="px-4 py-3 text-sm" > email@email.com </td>
+                                        <td class="px-4 py-3 text-sm" > {user.email} </td>
                                         <td class="px-4 py-3 text-sm" >15-01-2021 </td>
                                         <td class="px-4 py-3 text-xs">
                                            
@@ -49,12 +68,12 @@ export default function ClientsList() {
 
                                         </td>
                                     </tr>
-                                    
+                                        ))}
                                 </tbody>
                             </table>
                         </div>
                         <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                            <span class="flex items-center col-span-3"> Total des clients: 20 </span>
+                            <span class="flex items-center col-span-3"> Total des clients: {userList.length} </span>
                             
                         </div>
                     </div>

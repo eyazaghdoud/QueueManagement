@@ -22,6 +22,7 @@ import EmployeesList from "./components/Admin/EmployeesList";
 import ClientsList from "./components/Admin/ClientsList";
 import NewEmployeeForm from "./components/Admin/NewEmployeeForm";
 import AdminAccount from "./components/Admin/AdminAccount";
+import Ex from "./components/Ex";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
     <Route path="/clients" element={<ClientsList />} />
     <Route path="/new_employee" element={<NewEmployeeForm />} />
     <Route path="/admin_account" element={<AdminAccount/>} />
-
+    <Route path="/api_test" element={<Ex/>} />
 
 
 

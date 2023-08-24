@@ -36,7 +36,7 @@ public class UserServicesImpl implements UserServices {
 
 		if (u == null) {
 			return ("null user cannot be saved");
-		} else if (userRepo.findByEmail(u.getEmail()).isPresent()) {
+		} else if (userRepo.selectByEmail(u.getEmail()).isPresent()) {
 			return ("user with this email already exists");
 
 		} else if (userRepo.findByPhoneNumber(u.getPhoneNumber()).isPresent()) {
@@ -67,7 +67,7 @@ public class UserServicesImpl implements UserServices {
 		if (user.isEmpty()) {
 			return ("cannot update a nonexistent user");
 		}  else if (!updateUserRequest.getEmail().equals(user.get().getEmail())
-				&& userRepo.findByEmail(updateUserRequest.getEmail()).isPresent()
+				&& userRepo.selectByEmail(updateUserRequest.getEmail()).isPresent()
 				) {
 			return ("user with this email already exists");
 
@@ -91,8 +91,8 @@ public class UserServicesImpl implements UserServices {
 
 	@Override
 	public Optional<User> selectByEmail(String email) {
-
-		return userRepo.findByEmail(email);
+		System.out.println(userRepo.selectByEmail(email));
+		return userRepo.selectByEmail(email);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class UserServicesImpl implements UserServices {
 
 	@Override
 	public String resetPassword(ResetPwdRequest request) {
-		Optional<User> user = userRepo.findByEmail(request.getEmail());	
+		Optional<User> user = userRepo.selectByEmail(request.getEmail());	
 		if(user.isPresent()) {
 			                     /* to implement */
 			// once the user found, a code via email or sms will be sent to them
@@ -154,5 +154,11 @@ public class UserServicesImpl implements UserServices {
 			}
 		}
 		return ("error");
+	}
+
+	@Override
+	public List<User> findAllEmployees() {
+		return userRepo.findEmployees();
+	
 	}
 }
