@@ -37,6 +37,33 @@ const signUp = async (signupRequest) => {
  
  }
 
+ /****update user info  ***/
+const updateInfo = async (updateInfoRequest) => {  
+    return await axios.post(API_URL + '/update_user_info', updateInfoRequest
+    )
+ 
+ }
+
+  /****delete user  ***/
+const deleteUser = async (deleteUserRequest) => {  
+    return await axios.post(API_URL + '/delete_user', deleteUserRequest
+    )
+ 
+ }
+
+  /**** change role  ***/
+const changeRole = async (changeRoleRequest) => {  
+    return await axios.post(API_URL + '/change_user_role', changeRoleRequest, {
+        headers: {
+        'Content-Type': 'application/json',
+        }
+    }
+    )
+ 
+ }
+
+
+
 /***********************PASSWORD *********************/
 /**** change password  ***/
 const changePassword = async (changePwdRequest) => {
@@ -65,7 +92,10 @@ const resetPassword = async (resetPwdRequest) => {
     getEmployees,
     getSingleUser,
     signUp,
+    deleteUser,
+    updateInfo,
     changePassword,
-    resetPassword
+    resetPassword,
+    changeRole
  }
  

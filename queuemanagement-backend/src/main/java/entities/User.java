@@ -1,5 +1,7 @@
 package entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,6 +48,9 @@ public class User {
 	@Column(columnDefinition = "ENUM('CLIENT','ADMIN','OPERATOR')")
     @Enumerated(EnumType.STRING)
 	private RoleType role;
+	@Column(name="sign_up_date")
+	private Date signUpDate = new Date(System.currentTimeMillis());;
+	
 	
 	
     public User() {

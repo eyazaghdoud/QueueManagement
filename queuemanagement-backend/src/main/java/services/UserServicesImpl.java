@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import Interfaces.UserServices;
 import dto.ChangePwdRequest;
+import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
 import dto.UpdateUserInfoRequest;
@@ -55,6 +56,21 @@ public class UserServicesImpl implements UserServices {
 		userRepo.delete(u.get());
 		return ("user deleted successfully");
 
+	}
+	
+	@Override
+	public String adminDeleteUser(DeleteUserRequest deleteUserRequest) {
+		Optional<User> admin = userRepo.findById(deleteUserRequest.getIdAdmin());
+		if (admin.isPresent()) {
+			Optional<User> user = userRepo.findById(deleteUserRequest.getIdUser());
+			if(user.isPresent()) {
+				
+				userRepo.delete(user.get());
+				return ("user deleted");
+			}
+		} 
+		return ("error");
+		
 	}
 
 	@Override

@@ -23,6 +23,7 @@ import ClientsList from "./components/Admin/ClientsList";
 import NewEmployeeForm from "./components/Admin/NewEmployeeForm";
 import AdminAccount from "./components/Admin/AdminAccount";
 import Ex from "./components/Ex";
+import AdminChangePassword from "./components/Admin/AdminChangePassword";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
     <Route path="/new_employee" element={<NewEmployeeForm />} />
     <Route path="/admin_account" element={<AdminAccount/>} />
     <Route path="/api_test" element={<Ex/>} />
+    <Route path="/admin_change_password" element={<AdminChangePassword />} />
 
 
 

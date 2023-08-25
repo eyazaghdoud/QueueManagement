@@ -7,10 +7,7 @@ import UserServices from '../../API/UserServices'
 export default function NewEmployeeForm() {
 
     let navigate = useNavigate();
-    const submitHandler = (event) => {
-        event.preventDefault();
-
-    };
+    
 
     const roles = ["ADMIN", "OPERATOR"];
     const initialValues = {
@@ -48,10 +45,6 @@ export default function NewEmployeeForm() {
 
         e.preventDefault();
 
-
-
-
-        /***********  calling the function addUser from Services.js ************/
 
         UserServices.signUp(signupRequest)
             .then(response => {

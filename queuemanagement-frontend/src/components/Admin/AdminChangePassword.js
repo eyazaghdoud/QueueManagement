@@ -1,4 +1,4 @@
-import Nav from "../Nav/Navbar"
+import DashboardHeader from "./DashboardHeader"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import UserServices from '../../API/UserServices'
@@ -6,11 +6,11 @@ import { useEffect} from 'react'
 import '../../index.css'
 
 
-export default function ChangePassword() {
+export default function AdminChangePassword() {
     let navigate = useNavigate();
     const [user, setUser] = useState([])
     useEffect(() => {
-        UserServices.getSingleUser('email@email.com')
+        UserServices.getSingleUser('flenn@flen')
         .then(response => {
             setUser(response.data)
         })
@@ -119,24 +119,29 @@ export default function ChangePassword() {
 
     return (
         <>
-        <Nav/>
+        <DashboardHeader/>
 
-    <div class="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
-       <div class="text-center">
-        <h1 class="text-3xl font-medium">Changer votre mot de passe</h1>
-       </div>
-        <form onSubmit={handleSubmit} class="my-10">
-            <div class="flex flex-col space-y-5">
+        <div x-data="setup()" class="dark h-full w-120 " >
+        <div class=" h-full ml-14 mt-20 mb-10 md:ml-64 dark ">
+         <div class="text-black dark:text-white ml-8 mr-8" >
+         <div class="md:col-span-2 xl:col-span-3">
+        <h3 class="text-xl text-black font-semibold">Changer votre mot de passe</h3>
+        </div>
+       
+        <form onSubmit={handleSubmit} class="h-full dark " style={{ marginTop: '7%' }}>
+             <div class="mb-6">
                 <label for="oldPwd">
                     <p class="font-medium text-slate-700 pb-2">Ancien mot de passe</p>
                     <input id="oldPwd" 
                     name="oldPwd"
                     onChange={handleChange}
                     value={formValues.oldPwd}  type="password" 
-                    class="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" 
+                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     placeholder="***********"/>
                     <p className="error-message">{formErrors.oldPwd}</p>
                 </label>
+            </div>
+                                   
                 <label for="newPwd">
                     <p class="font-medium text-slate-700 pb-2">Nouveau mot de passe</p>
                     <input id="newPwd" 
@@ -144,7 +149,8 @@ export default function ChangePassword() {
                     onChange={handleChange}
                     value={formValues.newPwd} 
                     type="password" 
-                    class="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" 
+                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                   
                     placeholder="***********"/>
                     <p className="error-message">{formErrors.newPwd}</p>
                 </label>
@@ -155,7 +161,8 @@ export default function ChangePassword() {
                     onChange={handleChange}
                     value={formValues.confirmNewPwd}
                     type="password" 
-                    class="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" 
+                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                    
                     placeholder="***********"/>
                     <p className="error-message">{formErrors.confirmNewPwd}</p>
                 </label>
@@ -163,14 +170,19 @@ export default function ChangePassword() {
                
                 <button 
                 type="submit"
-                class="w-full py-3 font-medium text-white bg-blue-950 hover:bg-yellow-300 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                class="w-full mt-8 py-3 font-medium text-white bg-blue-950 hover:bg-yellow-300 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                       
                       <span>Confirmer</span>
                 </button>
                 
-            </div>
+        
         </form>
     </div>
+    </div>
+    </div>
+
+   
+   
     
 
 </>

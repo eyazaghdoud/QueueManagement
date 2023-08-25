@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Interfaces.UserServices;
 import dto.ChangePwdRequest;
+import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
 import dto.UpdateUserInfoRequest;
@@ -42,9 +43,14 @@ public class UserController {
 		return userServices.updateUser(request);
 	}
 	
-	@PostMapping("/delete_user")
-	public String deleteUser(@RequestBody int id) {	
+	@PostMapping("/close_account")
+	public String closeAccount(@RequestBody int id) {	
 		return userServices.deleteUser(id);
+	}
+	
+	@PostMapping("/delete_user")
+	public String deleteUser(@RequestBody DeleteUserRequest deleteUserRequest) {	
+		return userServices.adminDeleteUser(deleteUserRequest);
 	}
 	
 	@GetMapping("/all_users")

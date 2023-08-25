@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import dto.ChangePwdRequest;
+import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
 import dto.UpdateUserInfoRequest;
@@ -15,6 +16,7 @@ public interface UserServices {
 	
 	public String addUser(User u);
 	public String deleteUser(int id);
+	public String adminDeleteUser(DeleteUserRequest deleteUserRequest);
 	public String updateUser(UpdateUserInfoRequest updateUseRequest);
 	public String changeRole(UpdateRoleRequest updateRoleRequest);
 	public List<User> findAllUsers();
