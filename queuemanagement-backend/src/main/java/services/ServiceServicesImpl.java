@@ -62,4 +62,10 @@ public class ServiceServicesImpl implements ServiceServices{
 		return ("service updated successfully");
 	}
 
+	@Override
+	public Optional<Service> findByLibel(String libel) {
+		// TODO Auto-generated method stub
+		return serviceRepo.findByLibel(libel);
+	}
+
 }

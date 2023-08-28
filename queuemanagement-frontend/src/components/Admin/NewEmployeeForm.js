@@ -8,8 +8,6 @@ export default function NewEmployeeForm() {
 
     let navigate = useNavigate();
     
-
-    const roles = ["ADMIN", "OPERATOR"];
     const initialValues = {
         firstName: "",
         lastName: "",

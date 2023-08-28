@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(
+@Table(name="service",
 		uniqueConstraints = {
 				@UniqueConstraint(name = "service_libel_uq", columnNames = "libel")
 		}
@@ -19,7 +19,7 @@ public class Service {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(nullable = false)
+	@Column(nullable = false, name="libel")
 	private String libel;
 	
 	public Service() {

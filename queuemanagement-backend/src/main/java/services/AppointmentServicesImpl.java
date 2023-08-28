@@ -32,9 +32,9 @@ public class AppointmentServicesImpl implements AppointmentServices{
 	   if (a!=null) {
 		   if (appointmentRepo.findSingleAppointment(a.getDate(), a.getTime()).isPresent()){
 			   return ("appointment already booked");
-		   } else if (appointmentRepo.findByClient(a.getClient().getId()).size()!=0) {
+		   } /*else if (appointmentRepo.findByClient(a.getClient().getId()).size()!=0) {
 			   return("client have an appointment booked");   
-		   } 
+		   } */
 		   else {
 		   appointmentRepo.save(a);
 			return ("new appointment saved");

@@ -1,8 +1,10 @@
 package controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import services.ServiceServicesImpl;
 
 @RestController
 @RequestMapping(path = "/service")
+@CrossOrigin(origins= "*", allowedHeaders="*")
 public class ServiceController {
 	
 	@Autowired
@@ -38,10 +41,15 @@ public class ServiceController {
 	public String updateService(@RequestBody entities.Service service) {	
 		return serviceServices.updateService(service);
 	}
+	@PostMapping("/single_service")
+	public Optional<Service> singleService(@RequestBody String libel) {	
+		return serviceServices.findByLibel(libel);
+	}
 	
 	@GetMapping("/all_services")
 	public List<Service> allServices() {	
 		return serviceServices.findAllServices();
 	}
+	
 
 }

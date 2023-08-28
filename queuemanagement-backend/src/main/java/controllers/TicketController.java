@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import entities.VirtualTicket;
 
 @RestController
 @RequestMapping("/ticket")
+@CrossOrigin(origins= "*", allowedHeaders="*")
 public class TicketController {
 	
 	@Autowired
@@ -29,6 +31,10 @@ public class TicketController {
 	@GetMapping("/current_ticket")
 	public VirtualTicket getCurrentTicket() {	
 		return ticketServices.getCurrentTicket();
+	}
+	@GetMapping("/waiting_tickets")
+	public List<VirtualTicket> getWaitingTickets() {	
+		return ticketServices.getWaitingTickets();
 	}
 	
 	@GetMapping("/next_ticket")
@@ -46,9 +52,9 @@ public class TicketController {
 		return ticketServices.cancelTicket(id);
 	}
 	
-	@PostMapping("/ticket_info")
-	public TicketInfoResponse getTicketInfo(@RequestBody int id) {	
-		return ticketServices.getTicketInfo(id);
+	@PostMapping(path="/ticket_info",consumes = {"application/json"})
+	public TicketInfoResponse getTicketInfo(@RequestBody Integer clientId) {	
+		return ticketServices.getTicketInfo(clientId);
 	}
 	
 	

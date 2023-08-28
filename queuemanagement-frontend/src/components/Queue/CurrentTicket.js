@@ -1,8 +1,45 @@
 import Nav from "../Nav/Navbar";
+import { useState, useEffect } from "react";
+import TicketServices from "../../API/TicketServices";
+import { useNavigate } from "react-router-dom";
 
+export default function CurrentTicket(params) {
+    const navigate = useNavigate();
+    const [currentTicket, setCurrentTicket] = useState({})
+    const [currentClient, setCurrentClient] = useState({})
+    const [currentService, setCurrentService] = useState({})
+   
+    useEffect(() => {
+        let mounted = true;
 
-export default function CurrentTicket() {
-    const numberOfItems = 5;
+        TicketServices.getCurrentTicket()
+        .then(response => {
+            if(mounted) {
+            setCurrentTicket(response.data)
+            setCurrentClient(response.data.client)
+            setCurrentService(response.data.service)
+            console.log(response.data)
+            console.log(currentClient)
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        return () => mounted = false;
+       }, [])
+
+const nextTicket = () => {
+    TicketServices.passNextTicket()
+    .then(response => {
+       navigate('/Queue')
+       
+    
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    }
+
     return (
         <>
             <div >
@@ -19,7 +56,7 @@ export default function CurrentTicket() {
                                 <div>
                                     <div class="relative flex justify-around">
                                         <div class="flex items-end">
-                                            <span class="text-5xl text-gray-800 font-bold leading-0">35</span>
+                                            <span class="text-5xl text-gray-800 font-bold leading-0">{currentTicket.number}</span>
                                             
                                         </div>
                                     </div>
@@ -27,15 +64,15 @@ export default function CurrentTicket() {
                                 <ul role="list" class="w-max space-y-4 py-6 m-auto text-gray-600">
                                     <li class="space-x-2">
                                         <span class="text-Blue-950 font-semibold">Client:</span>
-                                        <span>Nom et prénom</span>
+                                        <span>{currentClient.lastName} {currentClient.firstName}</span>
                                     </li>
                                     <li class="space-x-2">
                                         <span class="text-Blue-950 font-semibold">Service:</span>
-                                        <span>Service</span>
+                                        <span>{currentService.libel}</span>
                                     </li>
                                 </ul>
                                 
-                                <button type="submit" 
+                                <button  onClick={nextTicket}
                                  class="block w-full py-3 px-6 text-center rounded-xl transition bg-blue-950 hover:bg-yellow-200 "
                                 
                                  >
@@ -57,7 +94,7 @@ export default function CurrentTicket() {
                                     </li>
                                     <li class="space-x-2 text-center">
                                      
-                                        <span>2 en attente | 1 cours</span>
+                                        <span>{params.queueSize} en attente | 1 cours</span>
                                     </li>
                                     <li class="space-x-2 text-center">
                                         <span>Total des tickets traités: 12</span>

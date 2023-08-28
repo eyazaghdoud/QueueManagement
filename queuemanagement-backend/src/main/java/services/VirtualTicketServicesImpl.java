@@ -50,7 +50,7 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 	public TicketInfoResponse bookTicket(VirtualTicket ticket) {
 		queue.offer(ticket);
 		ticketRepo.save(ticket);
-		return this.getTicketInfo(ticket.getNumber());
+		return this.getTicketInfo(ticket.getClient().getId());
 	}
 
 	@Override
@@ -99,14 +99,15 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 	}
 
 	@Override
-	public TicketInfoResponse getTicketInfo(int ticketNumber) {
-		Optional<VirtualTicket> t = ticketRepo.findById(ticketNumber);
+	public TicketInfoResponse getTicketInfo(int clientId) {
+		//Optional<VirtualTicket> t = ticketRepo.findById(ticketNumber);
+		Optional<VirtualTicket> t = ticketRepo.findOneByClientId(clientId);
 		if (t.isEmpty()) {
 			return null;
 		}
 		
 		TicketInfoResponse info = new TicketInfoResponse();
-		info.setTicketNumber(ticketNumber);
+		info.setTicketNumber(t.get().getNumber());
 		info.setService(t.get().getService().getLibel());
 		info.setClient(t.get().getClient());
 		if (t.get().getStatus().equals(StatusType.TREATED)) {
@@ -157,6 +158,12 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 		}
 		
 		return differenceInMinutes;
+	}
+
+	@Override
+	public List<VirtualTicket> getWaitingTickets() {
+		// TODO Auto-generated method stub
+		return queue.getElements().subList(1, queue.getElements().size());
 	}
 	
 	

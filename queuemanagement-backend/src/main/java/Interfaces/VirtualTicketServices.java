@@ -11,7 +11,8 @@ public interface VirtualTicketServices {
 	public VirtualTicket passNextTicket();
 	public String cancelTicket(int ticketNumber);
 	public List<VirtualTicket> getAllBookedTickets();
-	public TicketInfoResponse getTicketInfo(int ticketNumber);
+	public List<VirtualTicket> getWaitingTickets();
+	public TicketInfoResponse getTicketInfo(int clientId);
 	public VirtualTicket getCurrentTicket();
 	public int countWaitingTime(VirtualTicket ticket);
 
