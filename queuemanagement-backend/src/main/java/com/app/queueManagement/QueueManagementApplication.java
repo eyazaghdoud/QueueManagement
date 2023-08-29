@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan(basePackages = {"entities"})
-@ComponentScan(basePackages = {"controllers", "services"})
+@ComponentScan(basePackages = {"controllers", "services", "security"})
 @EnableJpaRepositories("repositories")
 public class QueueManagementApplication {
 
