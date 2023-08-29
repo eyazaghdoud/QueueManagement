@@ -6,38 +6,87 @@ import passwordIcon from "../../assets/carbon_password.svg";
 //import ValidUserContext from "../../authCheck";
 import LoginHead from './LoginHead.js';
 import { useNavigate } from 'react-router-dom';
+import Authentication from '../../Authentication/Authentication';
+import { useState } from "react";
+
 
 import Layout from "./Layout";
 
 let isInitial = true;
 
 function LoginForm() {
- //const validUserContext = useContext(ValidUserContext);
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
   let navigate = useNavigate();
+  const initialValues = { username: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
 
-  /*useEffect(() => {
-    if (isInitial) {
-      validUserContext.localAuthCheck();
-      isInitial = false;
+  const validate = (values) => {
+
+    const errors = {};
+    if (values.username === '') {
+        errors.username = "Username is required!";
     }
-  }, [validUserContext]);*/
+    if (values.password === '') {
+        errors.password = "Password is required!";
+    }
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    navigate('/Menu');
-   /* validUserContext.apiAuthCheck(
-      emailInputRef.current.value,
-      passwordInputRef.current.value
-    );*/
+    return errors;
+}
+
+const handleChange = (e) => {
+
+  const { name, value } = e.target;
+  setFormValues({ ...formValues, [name]: value });
+}
+
+const handleSubmit = (e) => {
+  const loginRequest = {
+      username: formValues.username,
+      password: formValues.password,
   };
+
+  e.preventDefault();
+
+
+  setFormErrors(validate(formValues));
+
+
+  if (Object.keys(validate(formValues)).length === 0) {
+
+
+   /***********  calling the function authentication from AuthProvider ************/
+
+      Authentication.authentication(loginRequest)
+      .then((response) => {
+          if (response.data.jwttoken !== "failed") {
+
+              localStorage.setItem("user", JSON.stringify(response.data));
+              localStorage.setItem("password", loginRequest.password);   
+              navigate("/Menu")
+
+          } else {
+
+              console.log("can't log in")
+            
+          };
+
+      })
+          .catch(error => {
+              console.log(error)
+
+          });
+
+  }
+
+  else { console.log("error") }
+}
+
 
   return (
     <Layout>
         <LoginHead />
-    <form onSubmit={submitHandler} className={classes.form}>
+    <form onSubmit={handleSubmit} className={classes.form}>
 
       <div>
         <img
@@ -53,11 +102,12 @@ function LoginForm() {
           name="user-name"
           autoComplete="on"
           placeholder="E-mail"
-          ref={emailInputRef}
-         /* required={!validUserContext.isLoggedIn}*/
+          onChange={handleChange}
+          value={formValues.username}
         ></input>
-      </div>
 
+      </div>
+      <p>{formErrors.username}</p>
       <div>
         <img
           className={classes.icon}
@@ -72,17 +122,18 @@ function LoginForm() {
           name="user-password"
           autoComplete="off"
           placeholder="Mot de passe"
-          ref={passwordInputRef}
-         /* required={!validUserContext.isLoggedIn}*/
+          onChange={handleChange}
+          value={formValues.password}
         ></input>
       </div>
+      <p>{formErrors.password}</p>
       <button
         className={classes.loginBtn}
-        /*disabled={validUserContext.isLoggedIn}*/
+        type='submit'
         
       >
         Login
-        {/*validUserContext.isLoggedIn ? "Already logged in" : "Login"*/}
+       
       </button>
     </form>
     </Layout>

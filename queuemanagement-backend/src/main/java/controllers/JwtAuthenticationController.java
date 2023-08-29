@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins= "https://localhost:3000/")
+@CrossOrigin(origins= "http://localhost:3000/")
 public class JwtAuthenticationController {
 
 
@@ -43,7 +43,7 @@ public class JwtAuthenticationController {
     @Autowired
     UserRepo userRepo;
 
-    @CrossOrigin(origins= "https://localhost:3000/")
+    
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
     public ResponseEntity<?> AuthenticationService(@RequestBody LoginRequest authenticationRequest) throws Exception {
 
