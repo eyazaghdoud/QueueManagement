@@ -1,6 +1,8 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,15 +42,28 @@ public class AppointmentController {
 	public String encloseAppointment(@RequestBody int id) {	
 		return appointmentService.encloseAppointment(id);
 	}
+	@PostMapping("/mark_absence_appointment")
+	public String markAbsenceAppointment(@RequestBody int id) {	
+		return appointmentService.markAbsenceAppointment(id);
+	}
 	
 	@GetMapping("/all_appointments")
 	public List<Appointment> getAllAppointments() {	
 		return appointmentService.findAllAppointments();
 	}
 	
-	@GetMapping("/client_total_appointments")
+	@PostMapping("/appointments_per_day")
+	public List<Appointment> getAppointmentsPerDay(@RequestBody Date date) {	
+		return appointmentService.findByDate(date);
+	}
+	
+	@PostMapping("/client_total_appointments")
 	public List<Appointment> getAllAppointmentsByClient(@RequestBody int idClient) {	
 		return appointmentService.findByClient(idClient);
+	}
+	@PostMapping("/client_pending_appointment")
+	public Optional<Appointment> getPendingAppointmentByClient(@RequestBody int idClient) {	
+		return appointmentService.getPendingAppointment(idClient);
 	}
 	
 	

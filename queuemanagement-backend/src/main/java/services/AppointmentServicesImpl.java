@@ -32,9 +32,23 @@ public class AppointmentServicesImpl implements AppointmentServices{
 	   if (a!=null) {
 		   if (appointmentRepo.findSingleAppointment(a.getDate(), a.getTime()).isPresent()){
 			   return ("appointment already booked");
-		   } /*else if (appointmentRepo.findByClient(a.getClient().getId()).size()!=0) {
-			   return("client have an appointment booked");   
-		   } */
+		   } else if (appointmentRepo.findByClient(a.getClient().getId()).size()!=0) {
+			   List<Appointment> apps = appointmentRepo.findByClient(a.getClient().getId());
+			   int exists = 0;
+			   for (Appointment app: apps) {
+				   if (app.getStatus().equals(AppointmentStatusType.PENDING)) {
+					   exists=1;
+					   break;
+				   }
+			   }
+			   
+		       if (exists==1) {
+			   return("client have an appointment booked");  
+		       } else {
+		    	   appointmentRepo.save(a);
+					return ("new appointment saved");
+		       }
+		   } 
 		   else {
 		   appointmentRepo.save(a);
 			return ("new appointment saved");
@@ -81,6 +95,16 @@ public class AppointmentServicesImpl implements AppointmentServices{
 		appointmentRepo.save(a.get());
 		return ("appointment enclosed");
 	}
+	@Override
+	public String markAbsenceAppointment(int id) {
+		Optional<Appointment> a = appointmentRepo.findById(id);
+		if (a.isEmpty()) {
+			return ("err: no appointment with given id");
+		}
+		a.get().setStatus(AppointmentStatusType.ABSENCE);
+		appointmentRepo.save(a.get());
+		return ("status changed");
+	}
 
 	@Override
 	public List<Appointment> findAllAppointments() {
@@ -95,6 +119,12 @@ public class AppointmentServicesImpl implements AppointmentServices{
 	@Override
 	public List<Appointment> findByClient(int idClient) {
 		return appointmentRepo.findByClient(idClient);
+	}
+
+	@Override
+	public Optional<Appointment> getPendingAppointment(int idClient) {
+		// TODO Auto-generated method stub
+		return appointmentRepo.findByClientAndStatus(idClient, AppointmentStatusType.PENDING);
 	}
 
 }

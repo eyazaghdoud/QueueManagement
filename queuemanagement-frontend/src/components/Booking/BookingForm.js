@@ -16,19 +16,17 @@ import { format } from 'date-fns';
 
 function BookingForm() {
   let navigate = useNavigate()
- const [options, setOptions] = useState([])
+ //const [options, setOptions] = useState([])
+ const options = ['CARTE_AGILIS', 'OTHER']
  const [date, setDate] = useState()
  const [time, setTime] = useState();
- const [chosenService, setchosenService] = useState();
- const [service, setService] = useState({});
+ let chosenService = '';
+ let service ='';
 
 
  const initialValues = {
    
-   service: {
-         id:1,
-         libel:"carte agilis"
-     },
+  service: '',
   client: { 
    id: 1,
    firstName:"flen",
@@ -38,46 +36,25 @@ function BookingForm() {
    role:"CLIENT"
     }
   }
-  const [formValues, setFormValues] = useState(initialValues);
+const [formValues, setFormValues] = useState(initialValues);
 
- useEffect(() => {
-  ServiceServices.getAllServices()
-  .then(response => {
-      setOptions(response.data)
 
-      
-
-  })
-  .catch(error => {
-      console.log(error)
-  })
-
-}, [])
 
 const handleChange = (e) => {
-  e.preventDefault()
+  console.log("User Selected Value - ", e.target.value);
+  //e.preventDefault();
   const { name, value } = e.target;
   setFormValues({ ...formValues, [name]: value });
 }
 
 const handleSubmit = (e) => {
 
- ServiceServices.getServiceByLibel(chosenService)
-      .then(response => {
-         
-          setService(response.data)
-          
-      })
 
-      .catch(error => {
-          console.log(error)
-
-      });
 
   const appointment = {
     date:format(date,'yyyy-MM-dd'),
     time:format(time,'HH:mm:ss'),
-    service: service,
+    service: formValues.service,
     client: initialValues.client
   };
 
@@ -152,16 +129,16 @@ const handleSubmit = (e) => {
         } />
        
     
-        <label>Service</label>
+        <label>Service:</label>
           <select className={classes.input}
           id='service'
           name='service'
           value={chosenService}
-          onChange={(e)=> setchosenService(e.target.value)}
+          onChange={handleChange}
           
            >
-             {options.map(s=> (
-              <option key={s.id}>{s.libel}</option>
+             {options.map((s,index)=> (
+              <option key={index}>{s}</option>
              ))}
         
           </select>
