@@ -163,7 +163,7 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 	@Override
 	public List<VirtualTicket> getWaitingTickets() {
 		// TODO Auto-generated method stub
-		return queue.getElements().subList(1, queue.getElements().size());
+		return queue.getElements();
 	}
 	
 	

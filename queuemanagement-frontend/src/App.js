@@ -25,6 +25,7 @@ import AdminAccount from "./components/Admin/AdminAccount";
 import Ex from "./components/Ex";
 import AdminChangePassword from "./components/Admin/AdminChangePassword";
 import AppointmentList from "./components/Appointment/AppointmentList";
+import OperatorMenu from "./components/Menu/OperatorMenu";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
     <Route path="/api_test" element={<Ex/>} />
     <Route path="/admin_change_password" element={<AdminChangePassword />} />
     <Route path="/appointments" element={<AppointmentList />} />
+    <Route path="/management_menu" element={<OperatorMenu />} />
 
 
 

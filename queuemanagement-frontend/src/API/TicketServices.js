@@ -33,6 +33,18 @@ const bookTicket = async(bookTicketRequest) => {
     )  
 }
 
+/**** cancel ticket  ***/
+const cancelTicket = async(ticketNumber) => {
+    return await axios.post(API_URL + "/cancel_ticket", ticketNumber, 
+    {
+       headers: {
+       'Content-Type': 'application/json',
+       }
+   }
+    )  
+}
+
+
 /**** ticket info ***/
 const getTicketInfo = async(clientId) => {
     return await axios.post(API_URL + "/ticket_info", clientId, 
@@ -52,6 +64,7 @@ const getTicketInfo = async(clientId) => {
    getCurrentTicket,
    getTicketInfo,
    passNextTicket,
-   bookTicket    
+   bookTicket,
+   cancelTicket  
  }
  

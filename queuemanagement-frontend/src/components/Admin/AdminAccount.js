@@ -10,15 +10,16 @@ export default function AdminAccount() {
 
 
     let navigate = useNavigate();
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const user=currentUser.userInfo;
 
-    const [user, setUser] = useState([])
+    
     const initialValues = {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         phoneNumber: user.phoneNumber,
-        password: user.password,
         role: user.role
     };
 
@@ -30,16 +31,9 @@ export default function AdminAccount() {
     }
 
     useEffect(() => {
-            UserServices.getSingleUser('flenn@flen')
-            .then(response => {
-                setUser(response.data)
+            
                 setFormValues(initialValues);                
-                
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
+         
     }, [])
  
     const handleSubmit = (e) => {

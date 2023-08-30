@@ -22,9 +22,10 @@ export default function Appointment() {
     const [appointmentList, setAppointmentList] = useState([])
     const [pendingAppointment, setPendingAppointment] = useState({})
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const currentUser = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        AppointmentServices.getAppointmentsPerClient(1)
+        AppointmentServices.getAppointmentsPerClient(currentUser.userInfo.id)
         .then(response => {
             setAppointmentList(response.data)
 
@@ -33,8 +34,13 @@ export default function Appointment() {
             console.log(error)
         })
 
-        AppointmentServices.getPendingAppointmentPerClient(1)
+        AppointmentServices.getPendingAppointmentPerClient(currentUser.userInfo.id)
         .then(response => {
+          console.log(response.data)
+          if (response.data===null) {
+            setPendingAppointment("")
+          }
+          else
           setPendingAppointment(response.data)
 
         })
@@ -74,7 +80,7 @@ const cancelHandler = (event) => {
             </h1>
            
             <div class='flex items-center justify-center mt-10' style={{marginTop:'-20px'}}>
-            {pendingAppointment!==null &&
+            {pendingAppointment!=="" &&
                 <div  
                 class="p-2 items-center justify-center w-[680px] rounded-xl group sm:flex space-x-6 bg-white bg-opacity-50 shadow-xl hover:rounded-xl">
                     <img class=" block h-16 w-16 rounded-lg" alt="art cover" loading="lazy" src={appointment} />
@@ -111,7 +117,7 @@ const cancelHandler = (event) => {
                         </div>
                     </div>
                 </div>}
-                {pendingAppointment===null &&
+                {pendingAppointment==="" &&
                    <div>
                    <h1 className="flex items-center space-x-4 justify-between">Pas de rendez-vous planifié</h1>
                    <div class="flex items-center space-x-4 justify-between">

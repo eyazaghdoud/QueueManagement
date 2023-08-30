@@ -60,8 +60,8 @@ const handleSubmit = (e) => {
               if (response.data.userInfo.role==='ADMIN') {
                 navigate("/employees")
               } else if (response.data.userInfo.role==='OPERATOR') {
-              navigate("/Menu")}
-              else if (response.data.userInfo.role==='OPERATOR'){
+              navigate("/management_menu")}
+              else if (response.data.userInfo.role==='CLIENT'){
               navigate("/Menu")
               }
 

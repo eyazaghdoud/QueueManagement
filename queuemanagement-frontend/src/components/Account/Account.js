@@ -6,15 +6,17 @@ import UserServices from '../../API/UserServices'
 import { useNavigate } from "react-router-dom"
 
 export default function Account() {
-    let navigate = useNavigate();
-
-    const [user, setUser] = useState([])
+    const navigate = useNavigate();
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const [user,setUser] = useState(currentUser.userInfo);
+    //const [user, setUser] = useState([])
     const initialValues = {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        phoneNumber: user.phoneNumber
+        phoneNumber: user.phoneNumber,
+        role:user.role
 
     };
 
@@ -26,7 +28,7 @@ export default function Account() {
     }
 
     useEffect(() => {
-            UserServices.getSingleUser('email@email.com')
+           /* UserServices.getSingleUser(user.email)
             .then(response => {
                 setUser(response.data)
                 setFormValues({
@@ -39,6 +41,13 @@ export default function Account() {
             })
             .catch(error => {
                 console.log(error)
+            })*/
+            setFormValues({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phoneNumber: user.phoneNumber
+        
             })
 
     }, [])
@@ -51,6 +60,7 @@ export default function Account() {
             lastName: formValues.lastName,
             email: formValues.email,
             phoneNumber: formValues.phoneNumber,
+            role:initialValues.role
 
         };
 
@@ -59,6 +69,7 @@ export default function Account() {
             .then(response => {
                 console.log(response.data)
                 if (response.data === 'user info updated successfully') {
+                    setUser(updateInfoRequest)
                     window.location.reload(); 
 
                 } else if (response.data === 'user with this email already exists') {

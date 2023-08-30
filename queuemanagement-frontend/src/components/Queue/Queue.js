@@ -28,7 +28,7 @@ export default function Queue() {
            
             setCurrentTicket(response.data)
             setCurrentClient(response.data.client)
-            setCurrentService(response.data.service)
+            //setCurrentService(response.data.service)
             console.log(response.data)
             console.log(currentClient)
             
@@ -79,15 +79,15 @@ const nextTicket = () => {
                                         <span class="text-Blue-950 font-semibold">Client:</span>
                                         <span>{currentClient.lastName} {currentClient.firstName}</span>
                                     </li>
-                                    <li class="space-x-2">
+                                    {/*<li class="space-x-2">
                                         <span class="text-Blue-950 font-semibold">Service:</span>
                                         <span>{currentService.libel}</span>
-                                    </li>
+    </li>*/}
                                 </ul>
                                 
                                 <button  onClick={nextTicket}
                                  class="block w-full py-3 px-6 text-center rounded-xl transition bg-blue-950 hover:bg-yellow-200 disabled:bg-gray-400"
-                                 disabled={queue.length==0? true: false}
+                                 disabled={queue.length-1==0? true: false}
                                  >
                                     <span class="text-white font-semibold">
                                         Ticket suivant
@@ -110,17 +110,17 @@ const nextTicket = () => {
                                         <span>
                                             {queue.length===0?
                                               0: 
-                                              queue.length
+                                              queue.length-1
                                             }
                                             _en attente | 1 cours </span>
                                     </li>
                                     <li class="space-x-2 text-center">
-                                        <span>Total des tickets traités: 12</span>
+                                        <span>Total des tickets traités: </span>
                                     </li>
                                     <li class="ml-80">
                                     <button type="submit" 
                                  class="block py-3 px-6 text-center rounded-xl transition bg-gray-700 hover:bg-yellow-200 ml-60  "
-                                
+                                 disabled={queue.length-1!==0}
                                  >
                                     <span class="text-white font-semibold">
                                         Cloturer
@@ -147,20 +147,21 @@ const nextTicket = () => {
                     <div
                         class="flex flex-nowrap ml-10 "
                     >
-                        {queue.length===0 &&
+                        {queue.length-1===0 &&
                          <div> 
                              <p> Pas de clients en attente.</p>
                           </div>
                         }
                         {queue.map((ticket) => (
      
+                       ticket.number!==currentTicket.number &&
                         <div key={ticket.id} class="inline-block px-3">
                             <div
                                 class="w-64 h-64 max-w-xs  overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
                                 style={{height:'150px'}}
                             >
                                 <div style={{padding:'50px'}}>
-                                <p >Ticket {ticket.ticketNumber}</p>
+                                <p >Ticket {ticket.number}</p>
                                 <p >{ticket.client.lastName} {ticket.client.firstName}  </p>
                                </div>
 
