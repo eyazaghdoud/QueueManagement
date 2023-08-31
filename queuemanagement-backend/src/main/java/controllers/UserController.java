@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Interfaces.UserServices;
 import dto.ChangePwdRequest;
+import dto.CodeConfirmationRequest;
 import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
@@ -91,6 +92,16 @@ public class UserController {
 	@PostMapping("/reset_password")
 	public String resetPassword(@RequestBody ResetPwdRequest request) {	
 		return userServices.resetPassword(request);
+	}
+	
+	@PostMapping("/send_code")
+	public String sendCode(@RequestBody int toNumber) {	
+		return userServices.sendSMS(toNumber);
+	}
+	
+	@PostMapping("/confirm_code")
+	public String confirmCode(@RequestBody CodeConfirmationRequest request) {	
+		return userServices.codeConfirmation(request);
 	}
 	
 }

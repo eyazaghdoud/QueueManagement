@@ -2,18 +2,27 @@ package dto;
 
 public class ResetPwdRequest {
 
-	private String email;
+	//private String email;
 	private int phoneNumber;
+	//private int code;
 	private String newPwd;
 	private String confirmNewPwd;
+	
+	/*public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}*/
 	
 	public ResetPwdRequest() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getEmail() {
+	/*public String getEmail() {
 		return email;
-	}
+	}*/
 
 	public int getPhoneNumber() {
 		return phoneNumber;

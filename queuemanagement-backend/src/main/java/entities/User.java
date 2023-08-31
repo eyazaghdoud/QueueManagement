@@ -50,6 +50,8 @@ public class User {
 	private RoleType role;
 	@Column(name="sign_up_date")
 	private Date signUpDate = new Date(System.currentTimeMillis());;
+	@Column(name="code")
+	private int code = 0;
 	
 	
 	
@@ -127,6 +129,22 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	
+	public int getCode() {
+		return code;
+	}
+
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+
+	public Date getSignUpDate() {
+		return signUpDate;
 	}
 
 

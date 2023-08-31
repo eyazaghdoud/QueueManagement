@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import dto.ChangePwdRequest;
+import dto.CodeConfirmationRequest;
 import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
@@ -25,5 +26,7 @@ public interface UserServices {
     public Optional<User> selectByEmail(String email) ;
     public String changePassword(ChangePwdRequest request);
     public String resetPassword(ResetPwdRequest request);
+    public String sendSMS(int to);
+    public String codeConfirmation(CodeConfirmationRequest request);
 
 }

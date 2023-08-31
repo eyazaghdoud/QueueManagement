@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import Interfaces.UserServices;
 import dto.ChangePwdRequest;
+import dto.CodeConfirmationRequest;
 import dto.DeleteUserRequest;
 import dto.ResetPwdRequest;
 import dto.UpdateRoleRequest;
@@ -17,6 +18,11 @@ import dto.UpdateUserInfoRequest;
 import entities.User;
 import entities.User.RoleType;
 import repositories.UserRepo;
+import utils.SmsUtils;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 @Service
 @Transactional
@@ -140,12 +146,14 @@ public class UserServicesImpl implements UserServices {
 
 	@Override
 	public String resetPassword(ResetPwdRequest request) {
-		Optional<User> user = userRepo.selectByEmail(request.getEmail());	
+		Optional<User> user = userRepo.findByPhoneNumber(request.getPhoneNumber());	
 		if(user.isPresent()) {
 			                     /* to implement */
 			// once the user found, a code via email or sms will be sent to them
-			// the user enters the code
+						
+		
 			// code verification: if code correct rest of function else return wrong code
+		
 			if (request.getNewPwd().equals(request.getConfirmNewPwd())) {
 				user.get().setPassword(request.getNewPwd());
 				userRepo.save(user.get());
@@ -154,10 +162,40 @@ public class UserServicesImpl implements UserServices {
 			else {
 				return ("passwords don't match");
 			}
+		
 		}
 		return ("error");
 	}
 
+	@Override
+	public String sendSMS(int to) {
+
+		Optional<User> user = userRepo.findByPhoneNumber(to);	
+		if (user.isPresent()) {
+		int randomCode = (int) ((Math.random() * (5999 - 1001)) + 1001);
+		user.get().setCode(randomCode);
+		userRepo.save(user.get());
+		
+        Twilio.init(SmsUtils.TWILIO_ACCOUNT_SID, SmsUtils.TWILIO_AUTH_TOKEN);
+
+        Message.creator(new PhoneNumber("+216"+to),
+                        new PhoneNumber(SmsUtils.TWILIO_NUMBER), randomCode+"").create();
+
+        return ("Message sent successfully");
+		} else {
+			return("no user with this number");
+		}
+}
+	@Override
+	public String codeConfirmation(CodeConfirmationRequest request) {
+		Optional<User> user = userRepo.findByPhoneNumber(request.getPhoneNumber());	
+		if(user.get().getCode()==request.getCode()) {
+			return ("wright code");
+		} else {
+			return("wrong code");
+		}
+		
+	}
 	@Override
 	public String changeRole(UpdateRoleRequest updateRoleRequest) {
 		Optional<User> admin = userRepo.findById(updateRoleRequest.getIdAdmin());
