@@ -48,6 +48,11 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 
 	@Override
 	public TicketInfoResponse bookTicket(VirtualTicket ticket) {
+		if(queue.isEmpty()) {
+			ticket.setNumber(1);
+		} else {
+			ticket.setNumber(queue.size()+1);
+		}
 		queue.offer(ticket);
 		ticketRepo.save(ticket);
 		return this.getTicketInfo(ticket.getClient().getId());
@@ -70,6 +75,7 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
         
 		if (t.get().getStatus().equals(StatusType.TREATING)) {
 		t.get().setStatus(StatusType.TREATED);
+		ticketRepo.delete(t.get());
 		queue.remove();
 		} 
 		queue.peek().setStatus(StatusType.TREATING);
@@ -77,6 +83,7 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 		queue.peek().setStartTime(Time.valueOf(currentTime));
 		ticketRepo.save(queue.peek());
 		System.out.println(queue);
+		
 		return queue.peek();
 	}
 	
@@ -108,7 +115,6 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 		
 		TicketInfoResponse info = new TicketInfoResponse();
 		info.setTicketNumber(t.get().getNumber());
-		info.setService(t.get().getService().getLibel());
 		info.setClient(t.get().getClient());
 		if (t.get().getStatus().equals(StatusType.TREATED)) {
 			info.setTicketsAlreadyPending(-1);
@@ -164,6 +170,14 @@ public class VirtualTicketServicesImpl implements VirtualTicketServices{
 	public List<VirtualTicket> getWaitingTickets() {
 		// TODO Auto-generated method stub
 		return queue.getElements();
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		queue.clear();
+		ticketRepo.deleteAll();
+		
 	}
 	
 	

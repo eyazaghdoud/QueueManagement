@@ -98,33 +98,34 @@ const handleSubmit = (e) => {
         <>
             <LoginNav />
 
-            <div class="flex items-center min-h-screen bg-white dark:bg-gray-900" style={{ marginTop: '-8%', marginBottom:'0' }}>
-                <div class="container mx-auto">
-                    <div class="max-w-md mx-auto my-10">
-                        <div class="text-center">
+            <div className="flex items-center min-h-screen bg-white dark:bg-gray-900" style={{ marginTop: '-8%', marginBottom:'0' }}>
+                <div className="container mx-auto">
+                    <div className="max-w-md mx-auto my-10">
+                        <div className="text-center">
                             <LoginHead title='Login' desc='Veuillez saisir votre e-mail et mot de passe'/>
                             </div>
-                        <div class="text-center">
+                        <div className="text-center">
                         <p className="error-message">{authError}</p>
                         </div>
-                        <div class="m-7">
+                        <div className="m-7">
                         
                             <form action="post" onSubmit={handleSubmit}>
-                                <div class="mb-6">
-                                    <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">E-mail</label>
+                                <div className="mb-6">
+                                    <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">E-mail</label>
                                     <input 
                                     type="email" name="username" id="username" 
                                     onChange={handleChange}
                                     value={formValues.username}
-                                    placeholder="you@company.com" 
-                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                                    placeholder="email@gmail.com" 
+                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                 </div>
                                 <p className="error-message">{formErrors.username}</p>
-                                <div class="mb-6">
-                                    <div class="flex justify-between mb-2">
-                                        <label for="password" class="text-sm text-gray-600 dark:text-gray-400">Mot de passe</label>
-                                        <a href="#!" onClick={resetPwdHandler}
-                                        class="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">
+                                <div className="mb-6">
+                                    <div className="flex justify-between mb-2">
+                                        <label htmlFor="password" className="text-sm text-gray-600 dark:text-gray-400">Mot de passe</label>
+                                        <a onClick={resetPwdHandler}
+                                        style={{cursor:'pointer'}}
+                                        className="text-sm hover:text-blue-950 text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300">
                                             Mot de passe oublié?
                                             </a>
                                     </div>
@@ -133,21 +134,22 @@ const handleSubmit = (e) => {
                                     id="password" 
                                     onChange={handleChange}
                                     value={formValues.password}
-                                    placeholder="Your Password" 
-                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                                    placeholder="***********" 
+                                    
+                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                 </div>
                                 <p className="error-message">{formErrors.password}</p>
-                                <div class="mb-6">
+                                <div className="mb-6">
                                     <button type="submit" 
-                                     className={classes.loginBtn}
-                                     class="w-full py-3 font-medium text-white bg-blue-950 hover:bg-yellow-300 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                                    
+                                     className="w-full py-3 font-medium text-white bg-blue-950 hover:bg-yellow-300 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                                         Connexion
                                     </button>
                                 </div>
-                                <p class="text-sm text-center text-gray-400">Don&#x27;t have an account yet? 
-                                <a href="#!"  onClick={signUpHandler}
-                                class="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">
-                                    Sign up</a>.</p>
+                                <p className="text-sm text-center text-gray-400">Vous n'avez pas de compte? 
+                                <a onClick={signUpHandler}
+                                className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800">
+                                    Créer un compte</a>.</p>
                             </form>
                         </div>
                     </div>

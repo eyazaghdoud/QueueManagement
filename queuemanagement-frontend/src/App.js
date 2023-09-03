@@ -17,39 +17,94 @@ import ChangePassword from "./components/Password/ChangePassword";
 import Queue from "./components/Queue/Queue";
 import CurrentTicket from "./components/Queue/CurrentTicket";
 import Appointment from "./components/Appointment/Appointment";
-import Dashboard from "./components/Admin/DashboardHeader";
 import EmployeesList from "./components/Admin/EmployeesList";
 import ClientsList from "./components/Admin/ClientsList";
 import NewEmployeeForm from "./components/Admin/NewEmployeeForm";
 import AdminAccount from "./components/Admin/AdminAccount";
-import Ex from "./components/Ex";
 import AdminChangePassword from "./components/Admin/AdminChangePassword";
 import AppointmentList from "./components/Appointment/AppointmentList";
 import OperatorMenu from "./components/Menu/OperatorMenu";
+import CodeConfirmation from "./components/Password/CodeConfirmation";
+import NewPassword from "./components/Password/NewPassword";
+import AdminProtectedRoutes from "./AdminProtectedRoutes";
+import OperatorProtectedRoutes from "./OperatorProtectedRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
+import ClientProtectedRoutes from "./ClientProtectedRoutes";
 
 function App() {
   return (
     <Routes>
+
+    {/*not protected routes */}
     <Route path="/" element={<SignIn />} />
-    <Route path="/Menu" element={<Menu />} />
-    <Route path="/Book_appointment" element={<BookingForm />} />
-    <Route path="/Ticket" element={<Ticket />} />
-    <Route path="/Account" element={<Account />} />
+    
     <Route path="/SignUp" element={<SignUp />} />
-    {/*<Route path="/Login" element={<LoginForm />} />*/}
     <Route path="/Reset_password" element={<ResetPassword />} />
-    <Route path="/Change_password" element={<ChangePassword />} />
-    <Route path="/Queue" element={<Queue />} />
-    <Route path="/current" element={<CurrentTicket />} />
-    <Route path="/appointment" element={<Appointment />} />
-    <Route path="/employees" element={<EmployeesList />} />
-    <Route path="/clients" element={<ClientsList />} />
-    <Route path="/new_employee" element={<NewEmployeeForm />} />
-    <Route path="/admin_account" element={<AdminAccount/>} />
-    <Route path="/api_test" element={<Ex/>} />
-    <Route path="/admin_change_password" element={<AdminChangePassword />} />
-    <Route path="/appointments" element={<AppointmentList />} />
-    <Route path="/management_menu" element={<OperatorMenu />} />
+    <Route path="/code_confirmation" element={<CodeConfirmation />} />
+    <Route path="/new_password" element={<NewPassword />} />
+
+       {/******* client protected routes */}
+    <Route path="/Menu" element={<ClientProtectedRoutes>
+      <Menu />
+     </ClientProtectedRoutes>} />
+     <Route path="/Book_appointment" element={<ClientProtectedRoutes>
+      <BookingForm />
+     </ClientProtectedRoutes>} />
+
+    <Route path="/Ticket" element={<ClientProtectedRoutes>
+      <Ticket />
+     </ClientProtectedRoutes>} />
+
+     <Route path="/appointment" element={<ClientProtectedRoutes>
+      <Appointment />
+     </ClientProtectedRoutes>} />
+
+     {/*protected routes */}
+     <Route path="/Account" element={<ProtectedRoutes>
+      <Account />
+     </ProtectedRoutes>} />
+
+     <Route path="/Change_password" element={<ProtectedRoutes>
+      <ChangePassword />
+     </ProtectedRoutes>} />
+
+
+
+    {/******* admin protected routes */}
+    <Route path="/employees" element={<AdminProtectedRoutes>
+           <EmployeesList />
+     </AdminProtectedRoutes>} />
+     <Route path="/clients" element={<AdminProtectedRoutes>
+      <ClientsList />
+     </AdminProtectedRoutes>} />
+     <Route path="/admin_account" element={<AdminProtectedRoutes>
+      <AdminAccount/>
+     </AdminProtectedRoutes>} />
+     <Route path="/new_employee" element={<AdminProtectedRoutes>
+      <NewEmployeeForm />
+     </AdminProtectedRoutes>} />
+     <Route path="/admin_change_password" element={<AdminProtectedRoutes>
+      <AdminChangePassword />
+     </AdminProtectedRoutes>} />
+
+     {/******* operator protected routes */}
+    
+     <Route path="/appointments" element={<OperatorProtectedRoutes>
+      <AppointmentList />
+     </OperatorProtectedRoutes>} />
+
+     <Route path="/management_menu" element={<OperatorProtectedRoutes>
+      <OperatorMenu />
+     </OperatorProtectedRoutes>} />
+    
+     <Route path="/Queue" element={<OperatorProtectedRoutes>
+      <Queue />
+     </OperatorProtectedRoutes>} />
+
+    <Route path="/current" element={<OperatorProtectedRoutes>
+      <CurrentTicket />
+     </OperatorProtectedRoutes>} />
+   
 
 
 

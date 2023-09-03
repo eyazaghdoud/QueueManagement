@@ -24,6 +24,7 @@ public interface UserServices {
 	public List<User> findAllByRole(RoleType role);
 	public List<User> findAllEmployees();
     public Optional<User> selectByEmail(String email) ;
+    public Optional<User> getById(int id) ;
     public String changePassword(ChangePwdRequest request);
     public String resetPassword(ResetPwdRequest request);
     public String sendSMS(int to);

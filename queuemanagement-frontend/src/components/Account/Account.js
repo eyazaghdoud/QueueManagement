@@ -8,15 +8,15 @@ import { useNavigate } from "react-router-dom"
 export default function Account() {
     const navigate = useNavigate();
     const currentUser = JSON.parse(localStorage.getItem("user"));
-    const [user,setUser] = useState(currentUser.userInfo);
+    const [user,setUser] = useState([]);
     //const [user, setUser] = useState([])
     const initialValues = {
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role:user.role
+        id: currentUser.userInfo.id,
+        firstName: currentUser.userInfo.firstName,
+        lastName: currentUser.userInfo.lastName,
+        email: currentUser.userInfo.email,
+        phoneNumber: currentUser.userInfo.phoneNumber,
+        role:currentUser.userInfo.role
 
     };
 
@@ -28,20 +28,24 @@ export default function Account() {
     }
 
     useEffect(() => {
-           /* UserServices.getSingleUser(user.email)
+       
+        console.log(currentUser)
+            UserServices.getUserById(currentUser.userInfo.id)
             .then(response => {
+                console.log(response)
+                console.log(currentUser)
                 setUser(response.data)
                 setFormValues({
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    phoneNumber: user.phoneNumber
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    email:  response.data.email,
+                    phoneNumber:  response.data.phoneNumber
             
                 })
             })
             .catch(error => {
                 console.log(error)
-            })*/
+            })
             setFormValues({
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -54,8 +58,10 @@ export default function Account() {
 
     const handleSubmit = (e) => {
 
+        e.preventDefault();
+
         const updateInfoRequest = {
-            id:initialValues.id,
+            id:currentUser.userInfo.id,
             firstName: formValues.firstName,
             lastName: formValues.lastName,
             email: formValues.email,
@@ -69,8 +75,12 @@ export default function Account() {
             .then(response => {
                 console.log(response.data)
                 if (response.data === 'user info updated successfully') {
-                    setUser(updateInfoRequest)
-                    window.location.reload(); 
+                    UserServices.getUserById(currentUser.userInfo.id).then(response => {
+                        setUser(response.data)
+                        window.location.reload(); 
+                    })
+                   
+                   
 
                 } else if (response.data === 'user with this email already exists') {
                     console.log("exists")
@@ -91,80 +101,80 @@ export default function Account() {
     return (
         <div>
             <Nav />
-            <form onSubmit={handleSubmit} class="h-full" style={{ marginTop: '7%' }}>
+            <form onSubmit={handleSubmit} className="h-full" style={{ marginTop: '7%' }}>
 
-                <div class="border-b-2 block md:flex">
+                <div className="border-b-2 block md:flex">
                    
-                        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
-                            <div class="flex justify-between">
-                                <span class="text-xl font-semibold block">{user.firstName} {user.lastName}</span>
+                        <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+                            <div className="flex justify-between">
+                                <span className="text-xl font-semibold block">{user.firstName} {user.lastName}</span>
                                 <button type='submit'
-                                class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
+                                className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
                                     Edit
                                     </button>
                             </div>
 
-                            <span class="text-gray-600">Informations de connexion</span>
+                            <span className="text-gray-600">Informations de connexion</span>
 
-                            <div class="w-full p-8 mx-2 flex justify-center">
+                            <div className="w-full p-8 mx-2 flex justify-center">
                             </div>
 
-                            <div class="pb-6">
-                                <label for="name" class="font-semibold text-gray-700 block pb-1">E-mail</label>
-                                <div class="flex">
-                                    <input  id="email" 
-                                    class="border-1  rounded-r px-4 py-2 w-full" 
+                            <div className="pb-6">
+                                <label for="email" className="font-semibold text-gray-700 block pb-1">E-mail</label>
+                                <div className="flex">
+                                    <input  name="email" id="email" 
+                                    className="border-1  rounded-r px-4 py-2 w-full" 
                                     type="email"
                                     onChange={handleChange}
                                     value={formValues.email}
                                      />
                                 </div>
                             </div>
-                            <div class="pb-6">
-                                <label for="name" class="font-semibold text-gray-700 block pb-1">Mot de passe</label>
-                                <div class="flex">
-                                    <input disabled id="pwd" class="border-1  rounded-r px-4 py-2 w-full" type="password" value="**********" />
+                            <div className="pb-6">
+                                <label for="name" className="font-semibold text-gray-700 block pb-1">Mot de passe</label>
+                                <div className="flex">
+                                    <input disabled id="pwd" className="border-1  rounded-r px-4 py-2 w-full" type="password" value="**********" />
                                 </div>
                                 
                                     <Link to="/Change_password"
-                                    class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
+                                    className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
                                     Changer le mot de passe</Link>
 
                             </div>
                         </div>
 
-                        <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
-                            <div class="rounded  shadow p-6">
-                                <div class="pb-6">
-                                    <label for="lastName" class="font-semibold text-gray-700 block pb-1">Nom</label>
-                                    <div class="flex">
+                        <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+                            <div className="rounded  shadow p-6">
+                                <div className="pb-6">
+                                    <label for="lastName" className="font-semibold text-gray-700 block pb-1">Nom</label>
+                                    <div className="flex">
                                         <input 
                                         name="lastName"
                                         id="lastName" 
                                         onChange={handleChange}
                                         value={formValues.lastName}
-                                        class="border-1  rounded-r px-4 py-2 w-full" type="text"  />
+                                        className="border-1  rounded-r px-4 py-2 w-full" type="text"  />
                                     </div>
                                 </div>
-                                <div class="pb-6">
-                                    <label for="firstName" class="font-semibold text-gray-700 block pb-1">Prénom</label>
-                                    <div class="flex">
+                                <div className="pb-6">
+                                    <label for="firstName" className="font-semibold text-gray-700 block pb-1">Prénom</label>
+                                    <div className="flex">
                                         <input 
                                         name="firstName"
                                         id="firstName" 
                                         onChange={handleChange}
                                         value={formValues.firstName}
-                                        class="border-1  rounded-r px-4 py-2 w-full" type="text"  />
+                                        className="border-1  rounded-r px-4 py-2 w-full" type="text"  />
                                     </div>
                                 </div>
 
-                                <div class="pb-4">
-                                    <label for="phoneNumber" class="font-semibold text-gray-700 block pb-1">Numéro de téléphone</label>
+                                <div className="pb-4">
+                                    <label for="phoneNumber" className="font-semibold text-gray-700 block pb-1">Numéro de téléphone</label>
                                     <input 
                                     name="phoneNumber" id="phoneNumber"
                                     onChange={handleChange}
                                     value={formValues.phoneNumber}
-                                    class="border-1  rounded-r px-4 py-2 w-full" type="text" />
+                                    className="border-1  rounded-r px-4 py-2 w-full" type="text" />
 
                                 </div>
 

@@ -15,5 +15,6 @@ public interface VirtualTicketServices {
 	public TicketInfoResponse getTicketInfo(int clientId);
 	public VirtualTicket getCurrentTicket();
 	public int countWaitingTime(VirtualTicket ticket);
+	public void deleteAll();
 
 }

@@ -57,6 +57,11 @@ public class TicketController {
 		return ticketServices.getTicketInfo(clientId);
 	}
 	
+	@GetMapping("/clear_queue")
+	public void deleteAll() {	
+		ticketServices.deleteAll();
+	}
+	
 	
 
 }

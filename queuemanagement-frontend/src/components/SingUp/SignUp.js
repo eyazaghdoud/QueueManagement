@@ -77,6 +77,7 @@ export default function SignUp() {
                                <div class="mb-6">
                                     <label for="lastName" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Nom</label>
                                     <input type="text" 
+                                    required
                                     name="lastName" 
                                     id="lastName" placeholder="Nom" 
                                     onChange={handleChange}
@@ -87,6 +88,7 @@ export default function SignUp() {
                                     <label for="firstName" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Prénom</label>
                                     <input type="text" 
                                     name="firstName" 
+                                    required
                                     id="firstName" placeholder="Prénom" 
                                     onChange={handleChange}
                                     value={formValues.firstName}
@@ -97,6 +99,7 @@ export default function SignUp() {
                                     class="block mb-2 text-sm text-gray-600 dark:text-gray-400">E-mail</label>
                                     <input type="email" 
                                     name="email" id="email" 
+                                    required
                                     onChange={handleChange}
                                     value={formValues.email}
                                     placeholder="email@email.com" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
@@ -106,6 +109,7 @@ export default function SignUp() {
                                     class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Numéro de téléphone</label>
                                     <input type="text" 
                                     name="phoneNumber" id="phoneNumber" 
+                                    required
                                     onChange={handleChange}
                                     value={formValues.phoneNumber}
                                     placeholder="(+216)" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
@@ -116,6 +120,7 @@ export default function SignUp() {
                                     </div>
                                     <input type="password" 
                                     name="password" id="password" 
+                                    required
                                     onChange={handleChange}
                                     value={formValues.password}
                                     placeholder="Your Password" 

@@ -3,11 +3,11 @@ import logo from '../../assets/agil.gif';
 export default function LoginNav() {
     return (
         <>
-<nav class="border-gray-200 mb-10 mt-10" >
-    <div class="w-full mx-auto">
-        <div class="mx-2 flex flex-wrap items-center justify-between">
-            <a href="#" class="flex">
-               {/* <svg class="h-10 mr-3" width="51" height="70" viewBox="0 0 51 70" fill="none"
+<nav className="border-gray-200 mb-10 mt-10" >
+    <div className="w-full mx-auto">
+        <div className="mx-2 flex flex-wrap items-center justify-between">
+            <a href="#" className="flex">
+               {/* <svg className="h-10 mr-3" width="51" height="70" viewBox="0 0 51 70" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0)">
                         <path d="M1 53H27.9022C40.6587 53 51 42.7025 51 30H24.0978C11.3412 30 1 40.2975 1 53Z"
@@ -24,9 +24,9 @@ export default function LoginNav() {
                         </clipPath>
                     </defs>
                 </svg>
-    */}    <img class="h-10 mr-3" width="51" height="70" viewBox="0 0 51 70" fill="none"
+    */}    <img className="h-10 mr-3" width="51" height="70" viewBox="0 0 51 70" fill="none"
     src={logo}/>
-                <span class="self-center text-lg font-semibold whitespace-nowrap">Agil-Rendez-vous et file d'attente</span>
+                <span className="self-center text-lg font-semibold whitespace-nowrap">Agil-Rendez-vous et file d'attente</span>
             </a>
             
           

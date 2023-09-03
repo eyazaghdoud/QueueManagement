@@ -15,5 +15,6 @@ public interface VirtualTicketRepo extends JpaRepository<VirtualTicket, Integer>
 	public Optional<VirtualTicket> findOneByStatus(StatusType status);
 	@Query("SELECT v FROM VirtualTicket v WHERE v.client.id = ?1")
 	public Optional<VirtualTicket> findOneByClientId(int clientId);
+	
 
 }

@@ -74,6 +74,11 @@ public class UserController {
 	public Optional<User> getSingleUser(@RequestBody String email) {	
 		return userServices.selectByEmail(email);
 	}
+	
+	@PostMapping("/single_user_by_id")
+	public Optional<User> getUserById(@RequestBody int id) {	
+		return userServices.getById(id);
+	}
 
 
 	/*change employee roles reserved for admin auth*/

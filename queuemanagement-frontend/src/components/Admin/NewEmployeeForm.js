@@ -95,6 +95,7 @@ export default function NewEmployeeForm() {
                                             placeholder="Nom"
                                             onChange={handleChange}
                                             value={formValues.lastName}
+                                            required
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-6">
@@ -104,6 +105,7 @@ export default function NewEmployeeForm() {
                                             id="firstName" placeholder="prenom"
                                             onChange={handleChange}
                                             value={formValues.firstName}
+                                            required
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-6">
@@ -113,6 +115,7 @@ export default function NewEmployeeForm() {
                                             placeholder="email@email.com"
                                             onChange={handleChange}
                                             value={formValues.email}
+                                            required
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-6">
@@ -123,6 +126,7 @@ export default function NewEmployeeForm() {
                                             placeholder="(+216)"
                                             onChange={handleChange}
                                             value={formValues.phoneNumber}
+                                            required
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-6">
@@ -130,7 +134,7 @@ export default function NewEmployeeForm() {
                                         <select class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                                             id='role'
                                             name='role'
-
+                                           
                                             onChange={onOptionChangeHandler}
                                             value={formValues.role}
                                         >
@@ -151,6 +155,7 @@ export default function NewEmployeeForm() {
                                         </div>
                                         <input type="password" name="password" id="password"
                                             placeholder="Your Password"
+                                            required
                                             onChange={handleChange}
                                             value={formValues.password}
                                             class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />

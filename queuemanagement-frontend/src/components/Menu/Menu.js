@@ -1,6 +1,5 @@
 import Layout from "../Login/Layout";
 import classes from "../Login/LoginForm.module.scss";
-import BookingForm from "../Booking/BookingForm";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import Nav from '../Nav/Navbar';
@@ -43,10 +42,7 @@ function Menu() {
     event.preventDefault();
    
     const bookTicketRequest = {
-      service: {
-        id: 1,
-        libel: "carte agilis"
-      },
+ 
       client: currentUser.userInfo
     }
     TicketServices.bookTicket(bookTicketRequest)

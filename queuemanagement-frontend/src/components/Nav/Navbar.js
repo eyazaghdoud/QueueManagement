@@ -7,6 +7,7 @@ export default function Nav() {
 
     const currentUser = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
+   
     const handleLogout = () => {
         Authentication.handleLogout();
         navigate('/')
@@ -17,7 +18,14 @@ export default function Nav() {
 <nav class="border-gray-200 mb-10 mt-10" >
     <div class="w-full mx-auto">
         <div class="mx-2 flex flex-wrap items-center justify-between">
-            <a href="#" class="flex">
+            <a onClick={()=> {
+                if (currentUser.userInfo.role==="CLIENT") {
+                navigate('/Menu')
+                } else {
+                    navigate('/management_menu')
+                }
+            }
+            } class="flex">
            <img class="h-10 mr-3" width="51" height="70" viewBox="0 0 51 70" fill="none"
     src={logo}/>
                 <span class="self-center text-lg font-semibold whitespace-nowrap">Agil-Rendez-vous et file d'attente</span>
@@ -64,14 +72,11 @@ export default function Nav() {
                      {currentUser.userInfo.role==="CLIENT" &&
                      <>
                     <li>
-                        <Link to='/Ticket'
+                        <Link to='/Menu'
                             class="bg-blue-700 md:bg-transparent text-white block pl-3 pr-4 py-2 md:text-blue-700 md:p-0 rounded"
-                            aria-current="page">Ticket</Link>
+                            aria-current="page">Menu</Link>
                     </li>
-                     <li>
-                     <Link to='/appointment'
-                         class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0">Rendez-vous</Link>
-                 </li>
+                     
                  <li>
                      <Link to='/Account'
                          class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0">Compte</Link>

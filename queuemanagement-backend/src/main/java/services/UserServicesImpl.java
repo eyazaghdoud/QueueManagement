@@ -215,4 +215,10 @@ public class UserServicesImpl implements UserServices {
 		return userRepo.findEmployees();
 	
 	}
+
+	@Override
+	public Optional<User> getById(int id) {
+		
+		return userRepo.findById(id);
+	}
 }

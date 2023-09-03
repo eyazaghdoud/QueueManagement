@@ -3,38 +3,35 @@ import Layout from "../Login/Layout";
 import classes1 from "../Login/LoginHead.module.scss";
 import Nav from "../Nav/Navbar";
 import { useState, useEffect } from "react";
-import ServiceServices from '../../API/ServiceServices'
 import AppointmentServices from '../../API/AppointmentServices'
 import { useNavigate } from "react-router-dom"
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
-import { TimePicker } from 'react-ios-time-picker';
-//import TimePicker from 'react-time-picker';  
-
 import { format } from 'date-fns';
+import {
+  TERipple,
+  TEModal,
+  TEModalDialog,
+  TEModalContent,
+  TEModalHeader,
+  TEModalBody,
+  TEModalFooter,
+} from "tw-elements-react";
 
 
 function BookingForm() {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   let navigate = useNavigate()
- //const [options, setOptions] = useState([])
- const options = ['CARTE_AGILIS', 'OTHER']
  const [date, setDate] = useState()
  const [time, setTime] = useState();
- let chosenService = '';
- let service ='';
+ const [showModal, setShowModal] = useState(false);
+
+
 
 
  const initialValues = {
    
-  service: '',
-  client: { 
-   id: 1,
-   firstName:"flen",
-   lastName: "flenn",
-   email: "email@email.com",
-   phoneNumber: 5555555,
-   role:"CLIENT"
-    }
+  client:currentUser.userInfo
   }
 const [formValues, setFormValues] = useState(initialValues);
 
@@ -49,12 +46,9 @@ const handleChange = (e) => {
 
 const handleSubmit = (e) => {
 
-
-
   const appointment = {
     date:format(date,'yyyy-MM-dd'),
     time:format(time,'HH:mm:ss'),
-    service: formValues.service,
     client: initialValues.client
   };
 
@@ -68,6 +62,7 @@ const handleSubmit = (e) => {
               navigate('/appointment')
 
           } else if (response.data === 'appointment already booked') {
+            setShowModal(true)
               console.log("exists")
           }
           
@@ -100,10 +95,9 @@ const handleSubmit = (e) => {
       className={classes.input} selected={date} 
       dateFormat="dd-MM-yyyy"
       onChange={(date) => {
-       // chosen =format(date,'yyyy-MM-dd');
-       // console.log(chosen)
+
         setDate(date); 
-      //  console.log(date);
+ 
 
       }
         } />
@@ -128,32 +122,67 @@ const handleSubmit = (e) => {
       }
         } />
        
-    
-        <label>Service:</label>
-          <select className={classes.input}
-          id='service'
-          name='service'
-          value={chosenService}
-          onChange={handleChange}
-          
-           >
-             {options.map((s,index)=> (
-              <option key={index}>{s}</option>
-             ))}
-        
-          </select>
 
        <button style={{marginTop:'10px'}}
         className={classes.loginBtn}
         type='submit'
-        /*disabled={validUserContext.isLoggedIn}*/
+
         
       >
         Confirmer
-        {/*validUserContext.isLoggedIn ? "Already logged in" : "Login"*/}
+ 
       </button>
     </form>
     </Layout>
+
+    <TEModal show={showModal} setShow={setShowModal}>
+        <TEModalDialog>
+          <TEModalContent>
+            <TEModalHeader>
+              {/* <!--Modal title--> */}
+              <h5 className="text-xl font-medium leading-normal text-red-800 dark:text-neutral-200">
+                Rendez-vous déjà reservé
+              </h5>
+              {/* <!--Close button--> */}
+              <button
+                type="button"
+                className="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                onClick={() => setShowModal(false)}
+                aria-label="Close"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </TEModalHeader>
+            {/* <!--Modal body--> */}
+            <TEModalBody>Un rendez-vous est déjà reservé pour cette date et cet horaire. Veuillez choisir une autre date ou horaire.</TEModalBody>
+            <TEModalFooter>
+              <TERipple rippleColor="light">
+                <button
+                  type="button"
+                  className="inline-block rounded bg-dark px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                  onClick={()=>setShowModal(false)}
+                >
+                  D'accord
+                </button>
+              </TERipple>
+             
+            </TEModalFooter>
+          </TEModalContent>
+        </TEModalDialog>
+      </TEModal>
    </>
     );
   }

@@ -4,7 +4,6 @@ import entities.User;
 
 public class TicketInfoResponse {
 	private int ticketNumber;
-	private String service;
 	private User client;
 	private int waitingTime;
 	private int ticketsAlreadyPending;
@@ -38,13 +37,6 @@ public class TicketInfoResponse {
 		this.ticketsAlreadyPending = ticketsAlreadyPending;
 	}
 
-	public String getService() {
-		return service;
-	}
-
-	public void setService(String service) {
-		this.service = service;
-	}
 
 	public User getClient() {
 		return client;

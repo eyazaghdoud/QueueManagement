@@ -27,16 +27,19 @@ input {
 }
 .loginBtn {
   @extend .mainInputStyle;
-  border: 2px solid $submit-color;
+  border: 2px solid black;
   margin-top: 5px;
-  font-size: medium;
-  color: $submit-color;
+  padding:10px;
+  font-size: large;
+  font-weight: bold;
+  color: black;
   cursor: pointer;
   &:active {
     opacity: 50%;
   }
   &:hover {
-    filter: invert(100%);
+    color: #fcff31f6;
+    border:2px solid #fcff31f6;
   }
 }
 .icon {

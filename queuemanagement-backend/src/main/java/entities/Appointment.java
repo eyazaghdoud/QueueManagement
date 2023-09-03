@@ -26,9 +26,7 @@ public class Appointment {
 	public enum AppointmentStatusType {
 		PENDING, CHECKED, ABSENCE	
 	}
-	public enum ServiceType {
-		CARTE_AGILIS, OTHER
-	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -41,9 +39,7 @@ public class Appointment {
                 nullable = false,
                 foreignKey = @ForeignKey(name = "FK_appointment_service")
                )*/
-	@Column(columnDefinition = "ENUM('CARTE_AGILIS', 'OTHER')")
-    @Enumerated(EnumType.STRING)
-	private ServiceType service;
+
 	@ManyToOne
 	@JoinColumn(name = "id_client",
                 nullable = false,
@@ -58,22 +54,22 @@ public class Appointment {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Appointment(Date date, Time time, ServiceType service, User client) {
+	public Appointment(Date date, Time time, User client) {
 		super();
 		this.date = date;
 		this.time = time;
-		this.service = service;
+		
 		this.client = client;
 		this.status = AppointmentStatusType.PENDING;
 	}
 
 
-	public Appointment(int id, Date date, Time time, ServiceType service, User client) {
+	public Appointment(int id, Date date, Time time, User client) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.time = time;
-		this.service = service;
+		
 		this.client = client;
 		this.status = AppointmentStatusType.PENDING;
 	}
@@ -99,16 +95,7 @@ public class Appointment {
 	}
 	
     
-	public ServiceType getService() {
-		return service;
-	}
 
-
-	public void setService(ServiceType service) {
-		this.service = service;
-	}
-
-	
 
 	public User getClient() {
 		return client;
@@ -129,7 +116,7 @@ public class Appointment {
 
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", date=" + date + ", time=" + time + ", service=" + service + ", client="
+		return "Appointment [id=" + id + ", date=" + date + ", time=" + time +  ", client="
 				+ client + ", status=" + status + "]";
 	}
 

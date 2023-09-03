@@ -8,9 +8,10 @@ import '../../index.css'
 
 export default function AdminChangePassword() {
     let navigate = useNavigate();
-    const [user, setUser] = useState([])
-    useEffect(() => {
-        UserServices.getSingleUser('flenn@flen')
+    //const [user, setUser] = useState([])
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+   /* useEffect(() => {
+        UserServices.getSingleUser(currentUser.userInfo.email)
         .then(response => {
             setUser(response.data)
         })
@@ -18,9 +19,9 @@ export default function AdminChangePassword() {
             console.log(error)
         })
 
-}, [])
+}, [])*/
     const [formValues, setFormValues] = useState({
-        id:user.id,
+        id:currentUser.userInfo.id,
         oldPwd: "",
         newPwd: "",
         confirmNewPwd: ""
@@ -85,7 +86,7 @@ export default function AdminChangePassword() {
 
     const handleSubmit = (e) => {
         const changePwdRequest = {
-            id: user.id,
+            id: currentUser.userInfo.id,
             oldPwd: formValues.oldPwd,
             newPwd: formValues.newPwd,
             confirmNewPwd: formValues.confirmNewPwd

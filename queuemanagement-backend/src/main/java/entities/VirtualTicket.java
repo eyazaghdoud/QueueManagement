@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,14 +21,10 @@ public class VirtualTicket {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//private int id;
 	private int number;
-	@ManyToOne
-	@JoinColumn(name = "id_service",
-	            foreignKey = @ForeignKey(name = "FK_ticket_service")
-	            )
-	private Service service;
+
 	@Column(columnDefinition = "ENUM('WAITING','TREATING','TREATED','ABANDONED')")
     @Enumerated(EnumType.STRING)
 	private StatusType status= StatusType.WAITING;
@@ -54,17 +48,15 @@ public class VirtualTicket {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public VirtualTicket(int number, Service service, StatusType status) {
+	public VirtualTicket(int number, StatusType status) {
 		super();
 		this.number = number;
-		this.service = service;
 		this.status = status;
 	}
 	
-	public VirtualTicket(int number, Service service, StatusType status, User client) {
+	public VirtualTicket(int number, StatusType status, User client) {
 		super();
 		this.number = number;
-		this.service = service;
 		this.status = status;
 		this.client = client;
 	}
@@ -88,12 +80,7 @@ public class VirtualTicket {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public Service getService() {
-		return service;
-	}
-	public void setService(Service service) {
-		this.service = service;
-	}
+	
 	public StatusType getStatus() {
 		return status;
 	}
@@ -112,7 +99,7 @@ public class VirtualTicket {
 
 	@Override
 	public String toString() {
-		return "VirtualTicket ["/*id=" + id */+ ", number=" + number + ", service=" + service + ", status=" + status
+		return "VirtualTicket ["/*id=" + id */+ ", number=" + number  + ", status=" + status
 				+ ", client=" + client + "]";
 	}
 

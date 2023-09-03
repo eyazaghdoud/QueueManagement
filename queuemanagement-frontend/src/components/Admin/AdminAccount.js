@@ -11,29 +11,51 @@ export default function AdminAccount() {
 
     let navigate = useNavigate();
     const currentUser = JSON.parse(localStorage.getItem("user"));
-    const user=currentUser.userInfo;
-
+    const [user,setUser] = useState([]);
     
     const initialValues = {
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role: user.role
+        id: currentUser.userInfo.id,
+        firstName: currentUser.userInfo.firstName,
+        lastName: currentUser.userInfo.lastName,
+        email: currentUser.userInfo.email,
+        phoneNumber: currentUser.userInfo.phoneNumber,
+        role:currentUser.userInfo.role
+
     };
 
-    const [formValues, setFormValues] = useState(initialValues);
-
+    const [formValues, setFormValues] = useState([]);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
     }
 
     useEffect(() => {
+       
+        console.log(currentUser)
+            UserServices.getUserById(currentUser.userInfo.id)
+            .then(response => {
+                console.log(response)
+                console.log(currentUser)
+                setUser(response.data)
+                setFormValues({
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    email:  response.data.email,
+                    phoneNumber:  response.data.phoneNumber
             
-                setFormValues(initialValues);                
-         
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            setFormValues({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phoneNumber: user.phoneNumber
+        
+            })
+
     }, [])
  
     const handleSubmit = (e) => {

@@ -1,10 +1,13 @@
 import axios from 'axios';
 
 const API_URL = "http://localhost:8080/appointment";
+const user = JSON.parse(localStorage.getItem("user"));
 
 /**** appointment list  ***/
 const getAllAppointments = async () => {
-    return await axios.get(API_URL + "/all_appointments" )  
+    return await axios.get(API_URL + "/all_appointments" ,  {
+     // headers: { Authorization: 'Bearer '+ user.jwttoken }
+   })  
  }
 
 /**** appointment list per day ***/
@@ -13,6 +16,7 @@ const getAppointmentsPerDay = async (date) => {
    {
       headers: {
       'Content-Type': 'application/json',
+     // Authorization: 'Bearer '+ user.jwttoken
       }
   } )  
 }
@@ -23,6 +27,7 @@ const getAppointmentsPerClient = async (clientId) => {
    {
       headers: {
       'Content-Type': 'application/json',
+     // Authorization: 'Bearer '+ user.jwttoken
       }
   } )  
 }
@@ -34,13 +39,16 @@ const getPendingAppointmentPerClient = async (clientId) => {
    {
       headers: {
       'Content-Type': 'application/json',
+      //Authorization: 'Bearer '+ user.jwttoken
       }
   } )  
 }
 
 /**** book appointment  ***/
 const bookAppointment = async (appointment) => {  
-    return await axios.post(API_URL + '/book_appointment', appointment
+    return await axios.post(API_URL + '/book_appointment', appointment, {
+     // headers: { Authorization: 'Bearer '+ user.jwttoken }
+   }
     )
  
  }
@@ -51,6 +59,7 @@ const encloseAppointment = async (appId) => {
    {
       headers: {
       'Content-Type': 'application/json',
+      //Authorization: 'Bearer '+ user.jwttoken
       }
   }
    )
@@ -63,6 +72,7 @@ const encloseAppointment = async (appId) => {
    {
       headers: {
       'Content-Type': 'application/json',
+     // Authorization: 'Bearer '+ user.jwttoken
       }
   }
    )
@@ -74,6 +84,7 @@ const encloseAppointment = async (appId) => {
    {
       headers: {
       'Content-Type': 'application/json',
+     // Authorization: 'Bearer '+ user.jwttoken
       }
   }
    )
